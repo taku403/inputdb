@@ -39,7 +39,9 @@
 							</div>
 						</div>
 						<div class="col-md-4" style="margin-top: 30px;">
-							<a class="btn btn-primary" href="/input/admin/parts/object/<c:out value="${order.part.id}"/>">詳細</a>
+						<div class="form-group">
+						<input class="form-control btn btn-primary part-detail" type="submit" value="詳細">
+						</div>
 						</div>
 
 					</div>

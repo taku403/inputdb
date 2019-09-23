@@ -93,9 +93,9 @@
 							<td><c:out value="${item.name}" /></td>
 							<td><c:out value="${item.price}"></c:out></td>
 							<td><fmt:formatDate value="${item.registerd }"
-									pattern="yyyy-MM-dd HH:mm:ss" />
+									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><fmt:formatDate value="${item.update}"
-									pattern="yyyy-MM-dd HH:mm:ss" />
+									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><c:out value="${item.supplier.name}"></c:out></td>
 					</c:forEach>
 				</tbody>

@@ -117,6 +117,16 @@ public class PartController {
 			return path + "object";
 	}
 
+	@RequestMapping(value="/admin/parts/object/{partId}")
+	String detailGet(@PathVariable Integer partId, Model model) throws Exception {
+
+		Part part = partDao.findById(partId);
+
+		model.addAttribute("part", part);
+		return "forward:/admin/parts/object";
+	}
+
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -124,5 +134,4 @@ public class PartController {
 		binder.registerCustomEditor(Date.class,
 				new CustomDateEditor(sdf, true));
 	}
-
 }

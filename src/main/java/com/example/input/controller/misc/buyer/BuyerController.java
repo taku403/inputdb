@@ -11,6 +11,7 @@ public class BuyerController {
 	private String path = "buyer/";
 
 
+
 	@RequestMapping(value="/buyer/index")
 	public String index() {
 
