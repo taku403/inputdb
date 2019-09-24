@@ -60,6 +60,8 @@
 				<value>hbm/Supplier.hbm.xml</value>
 				<value>hbm/Part.hbm.xml</value>
 				<value>hbm/Order.hbm.xml</value>
+				<value>hbm/Location.hbm.xml</value>
+				<value>hbm/Stock.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

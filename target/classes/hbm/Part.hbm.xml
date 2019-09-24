@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping
+	package="com.example.input.domain.misc.admin">
+	<class name="Part" table="parts">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="name" type="string"></property>
+		<property name="productNo" column="product_no" type="string"></property>
+		<property name="price" column="price" type="integer"></property>
+		<property name="lot" column="lot" type="integer"></property>
+		<property name="registerd" column="registerd" type="timestamp"></property>
+		<property name="update" column="update" type="timestamp"></property>
+		<many-to-one name="supplier" column="supplier_id"></many-to-one>
+	</class>
+</hibernate-mapping>
+
