@@ -2,11 +2,16 @@ package com.example.input.dao.misc.inventory;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.example.input.dao.HibernateORM;
 import com.example.input.domain.misc.inventory.Location;
 
+@Transactional
+@Repository
 public class LocationDaoImpl extends HibernateORM implements LocationDao {
 
 	@Override

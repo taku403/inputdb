@@ -54,7 +54,7 @@ public class OrderController {
 
 			orderDao.insert(order);
 
-			return "forward:/" + path + "list";
+			return "redirect:/" + path + "list";
 
 		}
 		List<Part> partsList = partDao.findAll();

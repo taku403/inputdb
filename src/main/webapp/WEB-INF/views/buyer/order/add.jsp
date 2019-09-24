@@ -22,79 +22,87 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <!-- 	<script type="text/javascript" src="/js/order/add.js"></script>
- --><title>注文画面</title>
+ -->
+<title>注文画面</title>
 <style>
 .part {
 	display: none;
 }
 </style>
 <script>
-$(document).ready(function () {
-//	alert("aa");
-	$('.parts').on('change', function () {
-//			alert("cc");
+	$(document).ready(function() {
+		//	alert("aa");
+		$('.parts').on('change', function() {
+			//			alert("cc");
 			var id = $(this).val();
 			console.log(id);
 			$('.part').hide();
 			$('#part-' + id).show();
+		});
 	});
-});
 </script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row justify-content-center">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<form:form modelAttribute="order" action="" method="post">
 					<form:hidden path="orderDate" />
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label col-form-label-md">品目</label>
+						<form:select
+							cssClass="custom-select parts form-control-md col-md-10"
+							path="part.id" items="${parts}" itemLabel="name" itemValue="id"></form:select>
+					</div>
 					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>品目</label>
-								<form:select cssClass="custom-select parts" path="part.id"
-									items="${parts}" itemLabel="name" itemValue="id"></form:select>
-							</div>
-							<div class="form-group">
-								<label for="quantity">数量</label>
+						<div class="form-group col-md-6">
+							<div class="row">
+								<label for="quantity"
+									class="col-sm-4 col-form-label col-form-label-md">数量</label>
 								<form:errors path="quantity" cssClass="text-danger" element="p"></form:errors>
-								<form:input cssClass="form-control" path="quantity" />
-							</div>
-							<div class="form-group">
-								<label for="reorderPoint">再発注点</label>
-								<form:input cssClass="form-control" path="reorderPoint" />
-							</div>
-							<form:hidden path="employee" />
-							<div class="form-group">
-								<input class="form-control" type="submit" value="注文する">
+								<form:input cssClass="col-sm-8 form-control form-control-md"
+									path="quantity" />
 							</div>
 						</div>
-						<div class="col-md-6">
-							<c:forEach items="${parts}" var="part">
-								<table class="table table-bordered part" id="part-<c:out value="${part.id}" />">
-									<thead>
-										<tr>
-											<th>製品番号</th>
-											<th>品名</th>
-											<th>価格</th>
-											<th>登録日</th>
-											<th>更新日</th>
-											<th>社名</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><c:out value="${part.productNo }" /></td>
-											<td><c:out value="${part.name}" /></td>
-											<td><c:out value="${part.price}"></c:out></td>
-											<td><fmt:formatDate value="${part.registerd }"
-													pattern="yyyy-MM-dd HH:mm:ss" />
-											<td><fmt:formatDate value="${part.update}"
-													pattern="yyyy-MM-dd HH:mm:ss" />
-											<td><c:out value="${part.supplier.name}"></c:out></td>
-									</tbody>
-								</table>
-							</c:forEach>
+						<div class="form-group col-md-6">
+							<div class="row">
+								<label class="col-sm-4 col-form-label col-form-label-md"
+									for="reorderPoint">再発注点</label>
+								<form:input cssClass="col-sm-8 form-control form-control-md"
+									path="reorderPoint" />
+							</div>
 						</div>
+					</div>
+					<c:forEach items="${parts}" var="part">
+						<table class="table table-bordered part row" style="margin-right: 0;"
+							id="part-<c:out value="${part.id}" />">
+							<thead>
+								<tr>
+									<th>製品番号</th>
+									<th>品名</th>
+									<th>価格</th>
+									<th>登録日</th>
+									<th>更新日</th>
+									<th>社名</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><c:out value="${part.productNo }" /></td>
+									<td><c:out value="${part.name}" /></td>
+									<td><c:out value="${part.price}"></c:out></td>
+									<td><fmt:formatDate value="${part.registerd }"
+											pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td><fmt:formatDate value="${part.update}"
+											pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td><c:out value="${part.supplier.name}"></c:out></td>
+								</tr>
+							</tbody>
+						</table>
+					</c:forEach>
+					<form:hidden path="employee" />
+					<div class="form-group row">
+						<input class="form-control" type="submit" value="注文する">
 					</div>
 				</form:form>
 			</div>
