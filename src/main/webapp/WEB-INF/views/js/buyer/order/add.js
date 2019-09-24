@@ -1,11 +1,10 @@
-$(function() {
+$(document).ready(function() {
 
-
-	var selectedId = $('.custom-select').val();
-
-	$('.custom-select').change(function() {
-		selectedId = $('option:selected').val();
+//	Selecet要素のクラス
+	$('.parts').on('change',function(){
+		var id = $(this).val();
+		$('.part').hide();
+		$('#part-' + id).show();
 	})
 
-	return selectedId;
 })

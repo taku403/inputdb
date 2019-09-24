@@ -59,7 +59,7 @@
 			</table>
 		</div>
 		<div class="row justify-content-center">
-				<a class="btn btn-primary" href="edit/<c:out value="${item.id}"/>">追加</a>
+				<a class="btn btn-primary" href="<spring:url value="/admin/employee/add"/>">追加</a>
 		</div>
 	</div>
 </body>

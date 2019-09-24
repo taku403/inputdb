@@ -52,6 +52,7 @@ public class OrderController {
 
 		if (!errors.hasErrors()) {
 
+			System.out.println("call add post");
 			orderDao.insert(order);
 
 			return "redirect:/" + path + "list";
@@ -61,7 +62,7 @@ public class OrderController {
 		model.addAttribute("order", order);
 		model.addAttribute("parts", partsList);
 
-		return path + "list";
+		return path + "add";
 
 	}
 
