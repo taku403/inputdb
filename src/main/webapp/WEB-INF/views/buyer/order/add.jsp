@@ -21,7 +21,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-	<script type="text/javascript" src="/input/js/buyer/order/add.js"></script>
+<script type="text/javascript" src="/input/js/buyer/order/add.js"></script>
 <title>注文画面</title>
 <style>
 .part {
@@ -54,7 +54,7 @@
 							path="part.id" items="${parts}" itemLabel="name" itemValue="id"></form:select>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<div class="row">
 								<label for="quantity"
 									class="col-sm-4 col-form-label col-form-label-md">数量</label>
@@ -63,7 +63,7 @@
 									path="quantity" />
 							</div>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<div class="row">
 								<label class="col-sm-4 col-form-label col-form-label-md"
 									for="reorderPoint">再発注点</label>
@@ -71,10 +71,19 @@
 									path="reorderPoint" />
 							</div>
 						</div>
+						<div class="form-group col-md-4">
+							<div class="row">
+								<label class="col-sm-2 col-form-label col-form-label-md"
+									for="employees"> 従業員 </label>
+								<form:select cssClass="col-sm-8 form-control form-control-mdl"
+									path="employee.id" items="${employees}" itemValue="employee.id"
+									itemName="employee.name"></form:select>
+							</div>
+						</div>
 					</div>
 					<c:forEach items="${parts}" var="part">
-						<table class="table table-bordered part row" style="margin-right: 0;"
-							id="part-<c:out value="${part.id}" />">
+						<table class="table table-bordered part row"
+							style="margin-right: 0;" id="part-<c:out value="${part.id}" />">
 							<thead>
 								<tr>
 									<th>製品番号</th>

@@ -7,23 +7,23 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.example.input.dao.misc.AddGroup;
-import com.example.input.dao.misc.LoginGroup;
-
 public class Employee {
 
 	private Integer id;
-	@NotBlank(groups= {AddGroup.class})
+//	@NotBlank(groups= {AddGroup.class})
+	@NotBlank
 	private String name;
-	@NotNull(groups= {AddGroup.class})
+//	@NotNull(groups= {AddGroup.class})
+	@NotNull
 	private Department department;
 	private String phone;
-	@NotBlank(groups= {AddGroup.class})
+//	@NotBlank(groups= {AddGroup.class})
+	@NotNull
 	private String address;
 	private String note;
-	@NotBlank(groups= {AddGroup.class,LoginGroup.class})
+//	@NotBlank(groups= {AddGroup.class,LoginGroup.class})
 	private String loginPass;
-	@NotBlank(groups= {AddGroup.class, LoginGroup.class})
+//	@NotBlank(groups= {AddGroup.class, LoginGroup.class})
 	private String loginId;
 	private Date registerd;
 	private Date update;

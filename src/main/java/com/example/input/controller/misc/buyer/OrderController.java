@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.input.dao.misc.admin.PartDao;
 import com.example.input.dao.misc.buyer.OrderDao;
+import com.example.input.dao.misc.employee.EmployeeDao;
+import com.example.input.domain.misc.admin.Employee;
 import com.example.input.domain.misc.admin.Part;
 import com.example.input.domain.misc.buyer.Order;
 
@@ -24,6 +26,8 @@ public class OrderController {
 	private OrderDao orderDao;
 	@Autowired
 	private PartDao partDao;
+	@Autowired
+	private EmployeeDao employeeDao;
 	private String path = "buyer/order/";
 
 	@RequestMapping(value = "/buyer/order/list")
@@ -41,8 +45,13 @@ public class OrderController {
 	String addGet(Model model) throws Exception {
 
 		List<Part> partList = partDao.findAll();
+		List<Employee> employeeList = employeeDao.findAll();
 		model.addAttribute("parts", partList);
 		model.addAttribute("order", new Order());
+		model.addAttribute("employees", employeeList);
+
+		Employee employee = employeeList.get(1);
+		System.out.println(employee.getName());
 
 		return path + "add";
 	}
@@ -59,8 +68,10 @@ public class OrderController {
 
 		}
 		List<Part> partsList = partDao.findAll();
+		List<Employee> employeeList = employeeDao.findAll();
 		model.addAttribute("order", order);
 		model.addAttribute("parts", partsList);
+		model.addAttribute("employees", employeeList);
 
 		return path + "add";
 

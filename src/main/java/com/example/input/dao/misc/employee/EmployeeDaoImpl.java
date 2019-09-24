@@ -49,7 +49,8 @@ public class EmployeeDaoImpl extends HibernateORM implements EmployeeDao {
 	@Override
 	public List<Employee> findAll() throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return getSession().createCriteria(Employee.class).setFetchMode("department", FetchMode.JOIN)
+		return getSession().createCriteria(Employee.class)
+				.setFetchMode("department", FetchMode.JOIN)
 				.list();
 	}
 
