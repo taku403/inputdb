@@ -31,6 +31,9 @@
 <script>
 	$(document).ready(function() {
 		//	alert("aa");
+		
+		$('')
+		
 		$('.parts').on('change', function() {
 			//			alert("cc");
 			var id = $(this).val();
@@ -74,10 +77,10 @@
 						<div class="form-group col-md-4">
 							<div class="row">
 								<label class="col-sm-2 col-form-label col-form-label-md"
-									for="employees"> 従業員 </label>
+									for="employees"> 発注者 </label>
 								<form:select cssClass="col-sm-8 form-control form-control-mdl"
-									path="employee.id" items="${employees}" itemValue="employee.id"
-									itemName="employee.name"></form:select>
+									path="employee.id" items="${employees}" itemValue="id"
+									itemName="name"></form:select>
 							</div>
 						</div>
 					</div>
