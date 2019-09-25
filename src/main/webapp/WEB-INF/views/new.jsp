@@ -49,7 +49,7 @@
 							<div class="form-group col-sm-3">
 								<label class="col-sm-2 col-form-label"><c:out
 										value="${permission.name}" />
-										<input type="checkbox" name="permissions" value="<c:out value="${permission.id}"/>">
+										<input type="checkbox" name="permissions" value="<c:out value="${permission.group}"/>">
 								</label>
 							</div>
 						</c:forEach>

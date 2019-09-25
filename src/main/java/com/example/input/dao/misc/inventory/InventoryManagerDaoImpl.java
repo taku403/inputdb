@@ -1,4 +1,4 @@
-package com.example.input.dao.misc.inventoryManager;
+package com.example.input.dao.misc.inventory;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.example.input.dao.HibernateORM;
-import com.example.input.domain.misc.InventoryManager;
 import com.example.input.domain.misc.admin.Employee;
+import com.example.input.domain.misc.inventory.InventoryManager;
 
 @Transactional
 @Repository

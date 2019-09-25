@@ -1,4 +1,4 @@
-package com.example.input.dao.misc.recipient;
+package com.example.input.dao.misc.receiving;
 
 import java.util.List;
 
@@ -9,50 +9,50 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.example.input.dao.HibernateORM;
-import com.example.input.domain.misc.Recipient;
 import com.example.input.domain.misc.admin.Employee;
+import com.example.input.domain.misc.receiving.Reception;
 
 @Transactional
 @Repository
-public class RecipientDaoImpl extends HibernateORM implements RecipientDao {
+public class ReceptionDaoImpl extends HibernateORM implements ReceptionDao {
 
 	@Override
-	public void insert(Recipient recipient) throws Exception {
+	public void insert(Reception recipient) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 
 		getSession().save(recipient);
 	}
 
 	@Override
-	public void update(Recipient recipient) throws Exception {
+	public void update(Reception recipient) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 
 		getSession().update(recipient);
 	}
 
 	@Override
-	public void delete(Recipient recipient) throws Exception {
+	public void delete(Reception recipient) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		getSession().delete(recipient);
 	}
 
 	@Override
-	public Recipient findById(Integer id) throws Exception {
+	public Reception findById(Integer id) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return (Recipient)getSession().createCriteria(Recipient.class).add(Restrictions.eq("id",id)).uniqueResult();
+		return (Reception)getSession().createCriteria(Reception.class).add(Restrictions.eq("id",id)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Recipient> findAll() throws Exception {
+	public List<Reception> findAll() throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return getSession().createCriteria(Restrictions.class).list();
 	}
 
 	@Override
-	public Recipient findByEmployee(Employee employee) throws Exception {
+	public Reception findByEmployee(Employee employee) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return (Recipient)getSession().createCriteria(Restrictions.class).setFetchMode("employee", FetchMode.JOIN)
+		return (Reception)getSession().createCriteria(Restrictions.class).setFetchMode("employee", FetchMode.JOIN)
 				.add(Restrictions.eq("employee.id", employee.getId())).uniqueResult();
 	}
 

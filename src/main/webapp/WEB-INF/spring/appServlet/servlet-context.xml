@@ -56,13 +56,13 @@
 				<value>hbm/Buyer.hbm.xml</value>
 				<value>hbm/InventoryManager.hbm.xml</value>
 				<value>hbm/Department.hbm.xml</value>
-				<value>hbm/Recipient.hbm.xml</value>
 				<value>hbm/Supplier.hbm.xml</value>
 				<value>hbm/Part.hbm.xml</value>
 				<value>hbm/Order.hbm.xml</value>
 				<value>hbm/Location.hbm.xml</value>
 				<value>hbm/Stock.hbm.xml</value>
 				<value>hbm/Permission.hbm.xml</value>
+				<value>hbm/Reception.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

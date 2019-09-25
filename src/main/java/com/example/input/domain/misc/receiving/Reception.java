@@ -1,10 +1,10 @@
-package com.example.input.domain.misc;
+package com.example.input.domain.misc.receiving;
 
 import javax.validation.constraints.NotNull;
 
 import com.example.input.domain.misc.admin.Employee;
 
-public class Recipient {
+public class Reception {
 
 	private Integer id;
 	@NotNull

@@ -1,9 +1,9 @@
-package com.example.input.dao.misc.inventoryManager;
+package com.example.input.dao.misc.inventory;
 
 import java.util.List;
 
-import com.example.input.domain.misc.InventoryManager;
 import com.example.input.domain.misc.admin.Employee;
+import com.example.input.domain.misc.inventory.InventoryManager;
 
 public interface InventoryManagerDao {
 

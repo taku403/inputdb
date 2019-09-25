@@ -1,4 +1,4 @@
-package com.example.input.domain.misc;
+package com.example.input.domain.misc.inventory;
 
 import javax.validation.constraints.NotNull;
 
