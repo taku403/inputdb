@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.input.dao.misc.AddGroup;
 import com.example.input.dao.misc.department.DepartmentDao;
 import com.example.input.dao.misc.employee.EmployeeDao;
+import com.example.input.domain.AddGroup;
 import com.example.input.domain.misc.admin.Department;
 import com.example.input.domain.misc.admin.Employee;
 //

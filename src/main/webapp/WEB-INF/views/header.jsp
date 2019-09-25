@@ -19,7 +19,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="<spring:url value="/admin/index" />">管理</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="<spring:url value="/admin/inventory/index" />">在庫</a></li>
+					href="<spring:url value="/inventory/index" />">在庫</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="<spring:url value="/buyer/index"/>">注文</a></li>
 				<li class="nav-item"><a class="nav-link" href="recipt/index">受付</a></li>

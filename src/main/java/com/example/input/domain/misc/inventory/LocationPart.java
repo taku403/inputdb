@@ -2,10 +2,11 @@ package com.example.input.domain.misc.inventory;
 
 import com.example.input.domain.misc.admin.Part;
 
-public abstract class Asm {
+public class LocationPart {
 
 	private Integer id;
 	private Part part;
+	private Location location;
 
 	public Integer getId() {
 		return id;
@@ -19,4 +20,12 @@ public abstract class Asm {
 	public void setPart(Part part) {
 		this.part = part;
 	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+
 }

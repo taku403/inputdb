@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,34 +22,19 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<title>ログイン画面</title>
+<title>新規登録</title>
 </head>
 <body>
 	<div class="container-fluid">
-		<c:import url="header.jsp"></c:import>
 		<div class="row justify-content-center">
-			<form:form modelAttribute="employee" action="" method="post">
-				<c:if test="${not empty loginErr }">
-					<p class="text-danger"> <c:out value="${loginErr}" /></p>
-				</c:if>
-				<div class="form-group">
-					<form:errors cssClass="text-danger" element="p" path="loginId" />
-					<label for="loginId">ログインID </label>
-					<form:input cssClass="form-control" path="loginId" />
-				</div>
-				<div class="form-group">
-					<form:errors cssClass="text-danger" method="loginPass" />
-					<label for="loginPass">ログインパスワード</label>
-					<form:input cssClass="form-control" path="loginPass" />
-				</div>
-				<div class="form-group">
-					<input class="form-control btn btn-primary" type="submit"
-						value="ログイン">
-				</div>
-			</form:form>
+			<c:import url="header.jsp"></c:import>
 		</div>
 		<div class="row justify-content-center">
-			<a class="btn btn-success" href="<spring:url value="/add"/>">新規登録</a>
+			<c:import url="admin/employee/layout.jsp">
+				<c:param name="employee" value="<c:out value="${employee}"/>"></c:param>
+				<c:param name="submitValue" value="登録"></c:param>
+				<c:param name="departments" value="<c:out value="${departments}"/>"></c:param>
+			</c:import>
 		</div>
 	</div>
 </body>

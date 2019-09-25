@@ -33,10 +33,12 @@
 			<table class="table table-bordered table-table-striped">
 				<tr>
 					<td><a
-						href='<spring:url value="/inventory/list"></spring:url>'>在庫情報</a></td>
+						href='<spring:url value="/inventory/asm1"></spring:url>'>工程1</a></td>
+						<td><a href='<spring:url value="/inventory/asm2"></spring:url>'>工程2</a>
 				</tr>
 			</table>
 		</div>
-	</div>
+
+		</div>
 </body>
 </html>
