@@ -52,7 +52,7 @@ public class ReceptionDaoImpl extends HibernateORM implements ReceptionDao {
 	@Override
 	public Reception findByEmployee(Employee employee) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return (Reception)getSession().createCriteria(Restrictions.class).setFetchMode("employee", FetchMode.JOIN)
+		return (Reception)getSession().createCriteria(Reception.class).setFetchMode("employee", FetchMode.JOIN)
 				.add(Restrictions.eq("employee.id", employee.getId())).uniqueResult();
 	}
 

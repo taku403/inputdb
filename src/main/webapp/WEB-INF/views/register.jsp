@@ -45,14 +45,12 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="row border" style="borderadius: 4px;">
-						<c:forEach var="permission" items="${permissions}">
-							<div class="form-group col-sm-3">
-								<label class="col-sm-2 col-form-label"><c:out
-										value="${permission.name}" />
-										<input type="checkbox" name="permissions" value="<c:out value="${permission.group}"/>">
-								</label>
-							</div>
-						</c:forEach>
+						<div class="form-group row border">
+							<form:checkbox path="${admin}" label="管理" />
+							<form:checkbox path="${buyer}" label="購買" />
+							<form:checkbox path="${reception}" label="受付" />
+							<form:checkbox path="${inventory }" label="在庫" />
+						</div>
 					</div>
 				</div>
 			</div>

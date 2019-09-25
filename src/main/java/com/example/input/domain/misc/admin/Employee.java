@@ -26,6 +26,10 @@ public class Employee {
 	private String loginPass;
 	@NotBlank(groups= {AddGroup.class, LoginGroup.class})
 	private String loginId;
+	private boolean admin;
+	private boolean buyer;
+	private boolean reception;
+	private boolean inventory;
 	private Date registerd;
 	private Date update;
 
@@ -91,6 +95,37 @@ public class Employee {
 
 	public void setLoginPass(String loginPass) {
 		this.loginPass = loginPass;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean isBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(boolean buyer) {
+		this.buyer = buyer;
+	}
+
+	public boolean isReception() {
+		return reception;
+	}
+
+	public void setReception(boolean reception) {
+		this.reception = reception;
+	}
+
+	public boolean isInventory() {
+		return inventory;
+	}
+
+	public void setInventory(boolean inventory) {
+		this.inventory = inventory;
 	}
 
 	public Date getRegisterd() {
