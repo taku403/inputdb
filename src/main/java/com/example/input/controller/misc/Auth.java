@@ -2,6 +2,7 @@ package com.example.input.controller.misc;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.input.dao.misc.admin.PermissionDao;
 import com.example.input.dao.misc.department.DepartmentDao;
 import com.example.input.dao.misc.employee.EmployeeDao;
+import com.example.input.domain.AddGroup;
 import com.example.input.domain.LoginGroup;
 import com.example.input.domain.misc.admin.Department;
 import com.example.input.domain.misc.admin.Employee;
+import com.example.input.domain.misc.admin.Permission;
 
 /**
  *
@@ -31,6 +35,8 @@ public class Auth {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private DepartmentDao departmentDao;
+	@Autowired
+	private PermissionDao permissionDao;
 
 	@RequestMapping(value = { "/", "/login" })
 	public String loginGet(Model model) {
@@ -66,12 +72,33 @@ public class Auth {
 
 
 	@RequestMapping(value="/new")
-	public String addGet(Model model) throws Exception {
+	public String newGet(Model model) throws Exception {
 
 		List<Department> departmentList = departmentDao.findAll();
+		List<Permission> permissionList = permissionDao.findAll();
+
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("departments", departmentList);
-
+		model.addAttribute("permissions", permissionList);
+		Permission permission = permissionList.get(1);
+		System.out.println(permission.getName());
 		return "new";
+	}
+
+
+	@RequestMapping(value="/new", method= RequestMethod.POST)
+	public String newPost(@Validated(AddGroup.class) Employee employee, Errors errors, HttpServletRequest request) {
+
+		if(!errors.hasErrors()) {
+
+			String[] permissions = request.getParameterValues("permissions");
+
+			for(String permissionId : permissions) {
+
+				if(permissionId.equals("1"))
+			}
+		}
+
+		return null;
 	}
 }

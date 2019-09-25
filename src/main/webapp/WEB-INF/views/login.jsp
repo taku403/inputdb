@@ -50,7 +50,7 @@
 			</form:form>
 		</div>
 		<div class="row justify-content-center">
-			<a class="btn btn-success" href="<spring:url value="/add"/>">新規登録</a>
+			<a class="btn btn-success" href="<spring:url value="/new"/>">新規登録</a>
 		</div>
 	</div>
 </body>
