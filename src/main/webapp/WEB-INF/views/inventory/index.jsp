@@ -22,23 +22,21 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<title></title>
+<title>場所一覧</title>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<c:import url="../header.jsp"></c:import>
 		</div>
-		<div class="row justify-content-center">
-			<table class="table table-bordered table-table-striped">
-				<tr>
-					<td><a
-						href='<spring:url value="/inventory/asm1"></spring:url>'>工程1</a></td>
-						<td><a href='<spring:url value="/inventory/asm2"></spring:url>'>工程2</a>
-				</tr>
-			</table>
-		</div>
-
-		</div>
+			<nav class="nav row">
+				<c:forEach>
+					<li class="nav-items col-sm-3">
+					<a class="nav-link
+					href="list/<c:out value="${item.id}"/>">
+								<c:out value="${location.name }" />倉庫</a></li>
+				</c:forEach>
+			</nav>
+	</div>
 </body>
 </html>
