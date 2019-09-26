@@ -6,7 +6,7 @@ public class Inventory {
 
 	private Integer id;
 	private Part part;
-	private Integer acutual;
+	private Integer actual;
 	private Location location;
 	public Integer getId() {
 		return id;
@@ -20,11 +20,12 @@ public class Inventory {
 	public void setPart(Part part) {
 		this.part = part;
 	}
-	public Integer getAcutual() {
-		return acutual;
+
+	public Integer getActual() {
+		return actual;
 	}
-	public void setAcutual(Integer acutual) {
-		this.acutual = acutual;
+	public void setActual(Integer actual) {
+		this.actual = actual;
 	}
 	public Location getLocation() {
 		return location;
