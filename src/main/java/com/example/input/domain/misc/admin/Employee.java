@@ -1,7 +1,8 @@
 package com.example.input.domain.misc.admin;
 
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,25 +14,33 @@ import com.example.input.domain.LoginGroup;
 public class Employee {
 
 	private Integer id;
-	@NotBlank(groups= {AddGroup.class})
+	@NotBlank(groups = { AddGroup.class })
 	private String name;
-	@NotNull(groups= {AddGroup.class})
+	@NotNull(groups = { AddGroup.class })
 	private Department department;
 	private String phone;
-	@NotBlank(groups= {AddGroup.class})
+	@NotBlank(groups = { AddGroup.class })
 	@NotNull
 	private String address;
 	private String note;
-	@NotBlank(groups= {AddGroup.class,LoginGroup.class})
+	@NotBlank(groups = { AddGroup.class, LoginGroup.class })
 	private String loginPass;
-	@NotBlank(groups= {AddGroup.class, LoginGroup.class})
+	@NotBlank(groups = { AddGroup.class, LoginGroup.class })
 	private String loginId;
+	private Date update;
+	private Date registerd;
 	private boolean admin;
 	private boolean buyer;
 	private boolean reception;
 	private boolean inventory;
-	private Date registerd;
-	private Date update;
+
+
+
+
+	public Employee() {
+
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -81,6 +90,14 @@ public class Employee {
 		this.note = note;
 	}
 
+	public String getLoginPass() {
+		return loginPass;
+	}
+
+	public void setLoginPass(String loginPass) {
+		this.loginPass = loginPass;
+	}
+
 	public String getLoginId() {
 		return loginId;
 	}
@@ -89,13 +106,22 @@ public class Employee {
 		this.loginId = loginId;
 	}
 
-	public String getLoginPass() {
-		return loginPass;
+	public Date getUpdate() {
+		return update;
 	}
 
-	public void setLoginPass(String loginPass) {
-		this.loginPass = loginPass;
+	public void setUpdate(Date update) {
+		this.update = update;
 	}
+
+	public Date getRegisterd() {
+		return registerd;
+	}
+
+	public void setRegisterd(Date registerd) {
+		this.registerd = registerd;
+	}
+
 	public boolean isAdmin() {
 		return admin;
 	}
@@ -128,21 +154,24 @@ public class Employee {
 		this.inventory = inventory;
 	}
 
-	public Date getRegisterd() {
-		return registerd;
+	public List<String> getPermssions() {
+
+		List<String> permissions = new ArrayList<String>();
+
+		if (admin)
+			permissions.add("管理");
+		if (buyer)
+			permissions.add("購買");
+		if (reception)
+			permissions.add("受付");
+		if (inventory)
+			permissions.add("在庫");
+
+		return permissions;
 	}
 
-	public void setRegisterd(Date registerd) {
-		this.registerd = registerd;
-	}
 
-	public Date getUpdate() {
-		return update;
-	}
 
-	public void setUpdate(Date update) {
-		this.update = update;
-	}
 
 
 }

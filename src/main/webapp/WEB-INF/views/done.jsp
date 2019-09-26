@@ -37,6 +37,8 @@
 						<th>住所</th>
 						<th>備考</th>
 						<th>ログインID</th>
+						<th>権限</th>
+						<th>登録日</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,6 +49,10 @@
 						<td><c:out value="${employee.address}"></c:out></td>
 						<td><c:out value="${employee.note}"></c:out></td>
 						<td><c:out value="${employee.loginId}"></c:out></td>
+						<td><c:forEach var="permission" items="${permissions}">
+								<span><c:out value="${permission}" /> </span>
+							</c:forEach></td>
+						<td><c:out value="${employee.registerd}" /></td>
 					</tr>
 				</tbody>
 			</table>

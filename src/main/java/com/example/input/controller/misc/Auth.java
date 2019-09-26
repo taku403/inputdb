@@ -13,18 +13,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.input.dao.misc.admin.AdminDao;
-import com.example.input.dao.misc.admin.PermissionDao;
-import com.example.input.dao.misc.buyer.BuyerDao;
 import com.example.input.dao.misc.department.DepartmentDao;
 import com.example.input.dao.misc.employee.EmployeeDao;
-import com.example.input.dao.misc.inventory.InventoryManagerDao;
-import com.example.input.dao.misc.receiving.ReceptionDao;
 import com.example.input.domain.AddGroup;
 import com.example.input.domain.LoginGroup;
 import com.example.input.domain.misc.admin.Department;
 import com.example.input.domain.misc.admin.Employee;
-import com.example.input.domain.misc.admin.PermissionCheckboxModel;
 
 /**
  *
@@ -39,16 +33,6 @@ public class Auth {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private DepartmentDao departmentDao;
-	@Autowired
-	private PermissionDao permissionDao;
-	@Autowired
-	private AdminDao adminDao;
-	@Autowired
-	private ReceptionDao receptionDao;
-	@Autowired
-	private BuyerDao buyerDao;
-	@Autowired
-	private InventoryManagerDao inventoryManagerDao;
 
 	@RequestMapping(value = { "/", "/login" })
 	public String loginGet(Model model) {
@@ -66,10 +50,11 @@ public class Auth {
 		if (!errors.hasErrors()) {
 			//			ログイン認証の処理を開始
 			System.out.println("call login Id");
-			Employee loginEmployee = employeeDao.findByLoginIdandLoginPass(employee.getLoginId());
+			Employee loginEmployee = employeeDao.findByloginId(employee.getLoginId());
 			if (loginEmployee != null) {
 
-				session.setAttribute("loginId", employee.getLoginId());
+				session.setAttribute("loginId", loginEmployee.getLoginId());
+				System.out.println(loginEmployee.getLoginId());
 				return "redirect:/admin/index";
 			} else {
 				model.addAttribute("loginErr", "ログインIDかログインパスワードが間違っています。");
@@ -85,14 +70,12 @@ public class Auth {
 	public String newGet(Model model) throws Exception {
 
 		List<Department> departmentList = departmentDao.findAll();
-		List<PermissionCheckboxModel> permissionList = permissionDao.findAll();
-
-		model.addAttribute("employee", new Employee());
+		Employee employee = new Employee();
+		model.addAttribute("employee", employee);
 		model.addAttribute("departments", departmentList);
-		model.addAttribute("permissions", permissionList);
-		PermissionCheckboxModel permission = permissionList.get(1);
-		System.out.println(permission.getName());
-		return "new";
+
+
+		return "register";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -101,15 +84,17 @@ public class Auth {
 			throws Exception {
 
 		List<Department> departmentList = departmentDao.findAll();
-
 		if (!errors.hasErrors()) {
-
-
+			System.out.println("not err");
+			employeeDao.insert(employee);
+			model.addAttribute("permissions", employee.getPermssions());
+			model.addAttribute("employee", employee);
+			return "done";
 		}
 		model.addAttribute("employee", employee);
 		model.addAttribute("departments", departmentList);
-		model.addAttribute("permissions", permissionList);
 
-		return "new";
+		System.out.println("err");
+		return "register";
 	}
 }

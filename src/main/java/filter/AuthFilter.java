@@ -46,7 +46,7 @@ public class AuthFilter implements Filter {
 		HttpSession session = req.getSession();
 		String uri = req.getRequestURI();
 		if (!uri.endsWith("/login")) {
-			if (!uri.endsWith("/new")) {
+			if (!uri.endsWith("/register")) {
 
 				if (session.getAttribute("loginId") == null) {
 

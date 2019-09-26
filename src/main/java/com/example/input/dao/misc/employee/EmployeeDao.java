@@ -12,4 +12,5 @@ public interface EmployeeDao {
 	public Employee findById(Integer id) throws Exception;
 	public List<Employee> findAll() throws Exception;
 	public Employee findByLoginIdandLoginPass(String loginId) throws Exception;
+	public Employee findByloginId(String loginId) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.example.input.domain.misc.buyer;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -18,7 +19,6 @@ public class Order {
 	private Integer quantity;
 	@Min(1)
 	private Integer reorderPoint;
-	@NotNull
 	private Employee employee;
 
 	public Integer getId() {

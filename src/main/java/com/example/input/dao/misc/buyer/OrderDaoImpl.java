@@ -1,5 +1,6 @@
 package com.example.input.dao.misc.buyer;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -19,7 +20,7 @@ public class OrderDaoImpl extends HibernateORM implements OrderDao {
 	@Override
 	public void insert(Order order) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-
+		order.setOrderDate(new Date());
 		getSession().save(order);
 	}
 
@@ -33,7 +34,7 @@ public class OrderDaoImpl extends HibernateORM implements OrderDao {
 	@Override
 	public void update(Order order) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-
+		order.setOrderDate(new Date());
 		getSession().update(order);
 	}
 
@@ -53,5 +54,4 @@ public class OrderDaoImpl extends HibernateORM implements OrderDao {
 				.setFetchMode("employee", FetchMode.JOIN)
 				.list();
 	}
-
 }

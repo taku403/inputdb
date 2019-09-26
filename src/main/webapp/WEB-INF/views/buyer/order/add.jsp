@@ -21,7 +21,6 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<script type="text/javascript" src="/input/js/buyer/order/add.js"></script>
 <title>注文画面</title>
 <style>
 .part {
@@ -31,9 +30,9 @@
 <script>
 	$(document).ready(function() {
 		//	alert("aa");
-		
+
 		$('')
-		
+
 		$('.parts').on('change', function() {
 			//			alert("cc");
 			var id = $(this).val();
@@ -74,15 +73,9 @@
 									path="reorderPoint" />
 							</div>
 						</div>
-						<div class="form-group col-md-4">
-							<div class="row">
-								<label class="col-sm-2 col-form-label col-form-label-md"
-									for="employees"> 発注者 </label>
-								<form:select cssClass="col-sm-8 form-control form-control-mdl"
-									path="employee.id" items="${employees}" itemValue="id"
-									itemName="name"></form:select>
-							</div>
-						</div>
+						<p class="form-group col-md-4">発注者: <c:out value="${loginId}" /></p>
+						<form:hidden path="employee"/>
+						<form:hidden path="orderDate"/>
 					</div>
 					<c:forEach items="${parts}" var="part">
 						<table class="table table-bordered part row"

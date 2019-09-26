@@ -61,4 +61,14 @@ public class EmployeeDaoImpl extends HibernateORM implements EmployeeDao {
 				.setFetchMode("department", FetchMode.JOIN)
 				.add(Restrictions.eq("loginId", loginId)).uniqueResult();
 	}
+
+	@Override
+	public Employee findByloginId(String loginId) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+
+		return (Employee)getSession().createCriteria(Employee.class)
+				.setFetchMode("department", FetchMode.JOIN)
+				.add(Restrictions.eq("loginId", loginId)).uniqueResult();
+
+	}
 }

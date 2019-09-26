@@ -5,19 +5,31 @@ package com.example.input.domain.misc.admin;
  * @author takurou
  *
  */
-public class PermissionCheckboxModel {
+public class Permission {
 
+	private Integer id;
 	private boolean admin;
 	private boolean buyer;
 	private boolean reception;
 	private boolean inventory;
 
-	public PermissionCheckboxModel() {
-		this.admin = false;
-		this.buyer = false;
-		this.reception = false;
-		this.inventory = false;
+	public Permission() {
+		this.admin = true;
+		this.buyer = true;
+		this.reception = true;
+		this.inventory = true;
 	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 
 	public boolean isAdmin() {
 		return admin;
