@@ -41,7 +41,9 @@ public class PartDaoImpl extends HibernateORM implements PartDao {
 	@Override
 	public Part findById(Integer id) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return (Part)getSession().createCriteria(Part.class).add(Restrictions.eq("id", id)).uniqueResult();
+		return (Part)getSession().createCriteria(Part.class)
+				.setFetchMode("supplier", FetchMode.JOIN)
+				.add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

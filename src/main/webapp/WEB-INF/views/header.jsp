@@ -38,11 +38,21 @@
 							href='<spring:url value="/plant/etc"></spring:url>'>その他</a>
 					</div></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input type="search" class="form-control mr-sm-2"
-					placeholder="検索..." aria-label="検索...">
-				<button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-			</form>
+			<div class="row">
+				<c:if test="${not empty param.loginId }">
+					<p class="col-sm-8">
+						<c:out value="${param.loginId }" />
+						さん
+					</p>
+					<p class="col-sm-4">
+						<a href='<spring:url value="/logout"></spring:url>'>ログアウト</a>
+					</p>
+				</c:if>
+				<p class="col-sm-8">ゲストさん</p>
+				<p class="col-sm-4">
+					<a href="<spring:url value="/login"/>">ログイン</a>
+				</p>
+			</div>
 		</div>
 	</nav>
 </header>

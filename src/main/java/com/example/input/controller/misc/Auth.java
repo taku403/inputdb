@@ -35,8 +35,13 @@ public class Auth {
 	private DepartmentDao departmentDao;
 
 	@RequestMapping(value = { "/", "/login" })
-	public String loginGet(Model model) {
+	public String loginGet(Model model,HttpSession session) {
 
+		String loginId = (String)session.getAttribute("loginId");
+		if( loginId != null) {
+
+			model.addAttribute("loginId", loginId);
+		}
 		model.addAttribute("employee", new Employee());
 
 		return "login";

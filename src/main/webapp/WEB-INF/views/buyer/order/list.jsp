@@ -76,10 +76,9 @@
 						<th>取り消し</th>
 						<th>品名</th>
 						<th>発注日</th>
-						<th>数量</th>
+						<th>発注数</th>
 						<th>再発注数量</th>
 						<th>発注者</th>
-						<th>社名</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -93,8 +92,8 @@
 							<td><fmt:formatDate value="${item.orderDate}"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><c:out value="${item.quantity}"></c:out></td>
-							<td><c:out value="${itme.reorderPoint}" /></td>
-							<td><c:out value="${item.part.supplier.name}"></c:out></td>
+							<td><c:out value="${itme.reorder}" /></td>
+							<td><c:out value="${item.employee.name }" /> </td>
 					</c:forEach>
 				</tbody>
 			</table>

@@ -34,13 +34,12 @@ public class Employee {
 	private boolean reception;
 	private boolean inventory;
 
-
-
-
 	public Employee() {
-
+		admin = false;
+		buyer = false;
+		reception = false;
+		inventory = false;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -169,9 +168,5 @@ public class Employee {
 
 		return permissions;
 	}
-
-
-
-
 
 }

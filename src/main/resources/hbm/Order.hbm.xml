@@ -11,7 +11,7 @@
 		<many-to-one name="part" column="part_id" />
 		<property name="orderDate" column="order_date" type="timestamp" />
 		<property name="quantity" column="quantity" type="integer" />
-		<property name="reorderPoint" column="reorder_point" type="integer" />
+		<property name="reorder" column="reorder" type="integer" />
 		<many-to-one name="employee" column="employee_id" />
 	</class>
 </hibernate-mapping>

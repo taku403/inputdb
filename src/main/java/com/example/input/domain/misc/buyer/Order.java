@@ -18,8 +18,14 @@ public class Order {
 	@Min(1)
 	private Integer quantity;
 	@Min(1)
-	private Integer reorderPoint;
+	private Integer reorder;
+	@NotNull
 	private Employee employee;
+
+
+	public Order() {
+		this.part = new Part();
+	}
 
 	public Integer getId() {
 		return id;
@@ -45,17 +51,19 @@ public class Order {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Integer getReorderPoint() {
-		return reorderPoint;
-	}
-	public void setReorderPoint(Integer reorderPoint) {
-		this.reorderPoint = reorderPoint;
-	}
 	public Employee getEmployee() {
 		return employee;
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public Integer getReorder() {
+		return reorder;
+	}
+
+	public void setReorder(Integer reorder) {
+		this.reorder = reorder;
 	}
 
 

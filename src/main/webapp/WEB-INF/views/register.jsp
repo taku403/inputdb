@@ -44,12 +44,12 @@
 					</div>
 				</div>
 				<div class="col-sm-6">
-					<div class="row border">
-						<div class="form-group">
-							<form:checkbox path="${admin}" label="管理" value="admin"/>
-							<form:checkbox path="${buyer}" label="購買" value="buyer"/>
-							<form:checkbox path="${reception}" label="受付" value="reception"/>
-							<form:checkbox path="${inventory}" label="在庫" value="inventory"/>
+					<div class="row border" style="borderadius: 4px;">
+						<div class="form-group row border">
+							<form:checkbox path="${admin}" label="管理"  value="on"/>
+							<form:checkbox path="${buyer}" label="購買"  value="on"/>
+							<form:checkbox path="${reception}" label="受付" value="on"/>
+							<form:checkbox path="${inventory }" label="在庫"  value="on"/>
 						</div>
 					</div>
 				</div>

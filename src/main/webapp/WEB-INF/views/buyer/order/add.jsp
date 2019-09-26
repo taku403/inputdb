@@ -48,11 +48,13 @@
 		<div class="row justify-content-center">
 			<div class="col-md-10">
 				<form:form modelAttribute="order" action="" method="post">
+P						<form:hidden path="employee" />
 					<form:hidden path="orderDate" />
+					<form:hidden path="part" />
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label col-form-label-md">品目</label>
+						<label class="col-sm-1 col-form-label col-form-label-md">品目</label>
 						<form:select
-							cssClass="custom-select parts form-control-md col-md-10"
+							cssClass="custom-select parts form-control-md col-md-11"
 							path="part.id" items="${parts}" itemLabel="name" itemValue="id"></form:select>
 					</div>
 					<div class="row">
@@ -68,14 +70,18 @@
 						<div class="form-group col-md-4">
 							<div class="row">
 								<label class="col-sm-4 col-form-label col-form-label-md"
-									for="reorderPoint">再発注点</label>
+									for="reorder">再発注点</label>
+								<form:errors path="reorder" cssClass="text-danger" element="p"></form:errors>
 								<form:input cssClass="col-sm-8 form-control form-control-md"
-									path="reorderPoint" />
+									path="reorder" />
 							</div>
 						</div>
-						<p class="form-group col-md-4">発注者: <c:out value="${loginId}" /></p>
-						<form:hidden path="employee"/>
-						<form:hidden path="orderDate"/>
+						<div class="form-group col-md-4">
+							<label class="col-sm-4 form-col-sm">発注者</label>
+							<p>
+								<c:out value="${name}" />
+							</p>
+						</div>
 					</div>
 					<c:forEach items="${parts}" var="part">
 						<table class="table table-bordered part row"
@@ -104,7 +110,6 @@
 							</tbody>
 						</table>
 					</c:forEach>
-					<form:hidden path="employee" />
 					<div class="form-group row">
 						<input class="form-control" type="submit" value="注文する">
 					</div>

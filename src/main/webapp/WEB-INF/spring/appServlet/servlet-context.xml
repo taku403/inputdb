@@ -62,6 +62,7 @@
 				<value>hbm/Location.hbm.xml</value>
 				<value>hbm/Stock.hbm.xml</value>
 				<value>hbm/Reception.hbm.xml</value>
+				<value>hbm/Inventory.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

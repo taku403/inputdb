@@ -37,7 +37,8 @@ public class OrderController extends Init {
 	String listGet(Model model) throws Exception {
 
 		List<Order> orderList = orderDao.findAll();
-
+		System.out.println("called ordar.findall");
+		System.err.println("order size = " + orderList.size());
 		model.addAttribute("orders", orderList);
 
 		return path + "list";
@@ -47,17 +48,15 @@ public class OrderController extends Init {
 	@RequestMapping(value = "/buyer/order/add")
 	String addGet(Model model, HttpSession session) throws Exception {
 
-		System.out.println("call orderAdd");
 		List<Part> partList = partDao.findAll();
 		Order order = new Order();
+		order.setPart(new Part());
 		String loginId = (String) session.getAttribute("loginId");
 		Employee employee = employeeDao.findByloginId(loginId.toString());
-		System.out.println(employee.getName());
 		order.setEmployee(employee);
-		System.out.println("called findall");
 		model.addAttribute("parts", partList);
-		model.addAttribute("order", new Order());
-		model.addAttribute("loginId", loginId);
+		model.addAttribute("order", order);
+		model.addAttribute("name", employee.getName());
 
 		System.out.println(employee.getName());
 
@@ -65,8 +64,7 @@ public class OrderController extends Init {
 	}
 
 	@RequestMapping(value = "/buyer/order/add", method = RequestMethod.POST)
-	String addPost(@Valid Order order, Errors errors, Model model,HttpSession session) throws Exception {
-		System.out.println("call emp");
+	String addPost(@Valid Order order, Errors errors, Model model, HttpSession session) throws Exception {
 		String loginId = (String) session.getAttribute("loginId");
 		Employee employee = employeeDao.findByloginId(loginId.toString());
 		order.setEmployee(employee);
@@ -75,23 +73,25 @@ public class OrderController extends Init {
 		System.out.println(order.getOrderDate());
 		System.out.println("call quant");
 		System.out.println(order.getQuantity());
+		System.out.println("call reorderpoint");
+		System.out.println(order.getReorder());
 		System.out.println("call part");
-		System.out.println(order.getPart().getName());
-		if (!errors.hasErrors()) {
+		Part part = partDao.findById(order.getPart().getId());
+		System.out.println(part.getName());
+		order.setPart(part);
 
 			System.out.println("call add post");
 			orderDao.insert(order);
 
-			return path + "list";
 
-		}
+
 		List<Part> partsList = partDao.findAll();
 		List<Employee> employeeList = employeeDao.findAll();
 		model.addAttribute("order", order);
 		model.addAttribute("parts", partsList);
 		model.addAttribute("employees", employeeList);
 		System.out.println("erro order");
-		return path + "add";
+		return "redirect:/" + path + "list";
 
 	}
 
@@ -116,10 +116,10 @@ public class OrderController extends Init {
 	}
 
 	@RequestMapping(value = "/buyre/order/delete/{id}", method = RequestMethod.POST)
-	String updatePost(@Valid Order order, Errors errors, Model model) throws Exception {
+	String updatePost(Order order, Errors errors, Model model) throws Exception {
 
 		orderDao.update(order);
+		return path + "list";
 
-		return "forward:/" + path + "list";
 	}
 }
