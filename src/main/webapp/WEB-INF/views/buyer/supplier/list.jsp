@@ -22,52 +22,16 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<title></title>
+
+	<script src="/js/common.js" type="text/javascript"></script>
+<title>新規登録</title>
 </head>
 <body>
 	<div class="contaniner-fluid">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand"
-				href='<spring:url value="/login"></spring:url>'>入力システム</a>
-			<button type="button" class="navbar-toggler" data-toggle="collapse"
-				data-target="#Navber" aria-controls="Navber" aria-expanded="false"
-				aria-label="ナビゲーションの切替">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+		<c:import url="../../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
 
-			<div class="collapse navbar-collapse" id="Navber">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="<spring:url value="/admin/index" />">管理<span
-							class="sr-only">(現位置)</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="<spring:url value="admin/inventory/index" />">在庫</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="<spring:url value="/admin/buyer/index"/>">購買</a></li>
-					<li class="nav-item"><a class="nav-link" href="recipt/index">受付</a></li>
-
-					<li class="nav-item dropdown"><a href="#"
-						class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							製造 </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item"
-								href='<spring:url value="/plant/assembly1"></spring:url>'>工程１</a>
-							<a class="dropdown-item"
-								href='<spring:url value="/plant/assembly2"></spring:url>'>工程２</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item"
-								href='<spring:url value="/plant/etc"></spring:url>'>その他</a>
-						</div></li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input type="search" class="form-control mr-sm-2"
-						placeholder="検索..." aria-label="検索...">
-					<button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-				</form>
-			</div>
-			<!-- /.navbar-collapse -->
-		</nav>
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -81,8 +45,10 @@
 			<tbody>
 				<c:forEach var="item" items="${suppliers}">
 					<tr>
-					<td><a class="btn btn-primary" href="edit/<c:out value="${item.id}"/>">編集</a></td>
-					<td><a class="btn btn-danger" href="delete/<c:out value="${item.id}"/>">削除</a></td>
+						<td><a class="btn btn-primary"
+							href="edit/<c:out value="${item.id}"/>">編集</a></td>
+						<td><a class="btn btn-danger"
+							href="delete/<c:out value="${item.id}"/>">削除</a></td>
 						<td><c:out value="${item.name}" /></td>
 						<td><c:out value="${item.address }" /></td>
 						<td><c:out value="${item.note}"></c:out></td>

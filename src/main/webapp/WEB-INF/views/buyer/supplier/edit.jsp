@@ -22,10 +22,15 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<title></title>
+	<script src="/js/common.js" type="text/javascript"></script>
+<title>修正</title>
 </head>
 <body>
 	<div class="container-fluid">
+		<c:import url="../../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+
 		<div class="row justify-content-center">
 			<form:form modelAttribute="supplier" action="" method="post">
 				<div class="form-group">
@@ -44,7 +49,8 @@
 					<form:input cssClass="form-control" path="note" />
 				</div>
 				<div class="form-group">
-					<input type="submit" class="form-control btn btn-primary" value="適用">
+					<input type="submit" class="form-control btn btn-primary"
+						value="適用">
 				</div>
 			</form:form>
 		</div>

@@ -25,18 +25,21 @@
 <title>場所一覧</title>
 </head>
 <body>
+	<c:import url="../header.jsp">
+		<c:param name="loginId" value="${loginId }"></c:param>
+	</c:import>
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<c:import url="../header.jsp"></c:import>
 		</div>
-			<nav class="nav row">
-				<c:forEach>
-					<li class="nav-items col-sm-3">
-					<a class="nav-link
+		<nav class="nav row">
+			<c:forEach>
+				<li class="nav-item col-sm-3"><a class="nav-link"
 					href="list/<c:out value="${item.id}"/>">
-								<c:out value="${location.name }" />倉庫</a></li>
-				</c:forEach>
-			</nav>
+						<c:out value="${location.name }" />倉庫
+				</a></li>
+			</c:forEach>
+		</nav>
 	</div>
 </body>
 </html>

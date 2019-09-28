@@ -1,0 +1,26 @@
+include import/taglib
+
+header.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    a.navbar-brand(href!='<spring:url value="/login.jsp/>') 入力システム
+    button.navbar-toggler(type="button", data-toggle="collapse",data-target="#Navber",aria-controls="Navber",aria-expanded="false",aria-label="ナビゲーションの切り替え")
+        span.navbar-toggler-icon
+    .collapse.navbar-collapse(id="Navber")
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                a.nav-link(href!='<spring:url value="/admin/index" />') 管理
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                a.nav-link(href!='<spring:url value="/inventory/index" />') 在庫
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                a.nav-link(href!='<spring:url value="/buyer/index" />') 注文
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                a.nav-link(href!='<spring:url value="/receiving/index" />') 受付
+            li.nav-item.dropdown
+                a#navbarDropdown.nav-link.dropdown-toggle(role="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") 製造
+                .dropdown-menu(aria-labelledby="navbarDropdown")
+                    a.dropdown-item(href!='<spring:url value="/assembly/asm1"/>') 工程１
+                    a.dropdown-item(href!='<spring:url value="/assembly/asm2"/>') 工程２
+                    a.dropdown-item(href!='<spring:url value="/assembly/asm3"/>') 工程３
+                    a.dropdown-item(href!='<spring:url value="/assembly/asm4"/>') 工程４

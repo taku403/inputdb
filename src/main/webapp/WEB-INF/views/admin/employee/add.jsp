@@ -25,7 +25,11 @@
 <title>従業員の新規登録</title>
 </head>
 <body>
-<div class="container-fluid">
+	<div class="container-fluid">
+		<c:import url="../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+
 		<div class="row justify-content-center"></div>
 		<form:form modelAttribute="employee" action="" method="post">
 			<div class="form-group">

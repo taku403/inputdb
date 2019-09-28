@@ -28,7 +28,7 @@
 <body>
 	<div class="container-fluid">
 		<c:import url="header.jsp">
-		<c:param name="loginId" value="${param.loginId }" />
+		<c:param name="loginId" value="${loginId}" />
 		</c:import>
 		<div class="row justify-content-center">
 			<form:form modelAttribute="employee" action="" method="post">

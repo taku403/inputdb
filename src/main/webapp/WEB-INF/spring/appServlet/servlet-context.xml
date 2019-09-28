@@ -5,6 +5,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee
  http://www.springframework.org/schema/jee/spring-jee.xsd
  http://www.springframework.org/schema/mvc
@@ -14,13 +15,15 @@
  http://www.springframework.org/schema/tx
  http://www.springframework.org/schema/tx/spring-tx.xsd
  http://www.springframework.org/schema/context
- http://www.springframework.org/schema/context/spring-context.xsd">
+ http://www.springframework.org/schema/context/spring-context.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<!-- DispatcherServlet Context: defines this servlet's request-processing
 		infrastructure -->
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven validator="validator" />
-  <!-- Handles HTTP GET requests for /resources/** by efficiently serving up
-		static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
+		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**"
 		location="/resources/" />
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources
@@ -30,11 +33,14 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<!-- aspect-jの宣言 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	<!-- コンポーネントスキャンの範囲指定 -->
 	<context:component-scan
 		base-package="com.example.input" />
 	<!-- データソースの指定 -->
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/inputdb" />
+	<jee:jndi-lookup id="dataSource"
+		jndi-name="jdbc/inputdb" />
 	<!-- バリデータの設定 -->
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">

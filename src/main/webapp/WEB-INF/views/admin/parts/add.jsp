@@ -16,7 +16,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 	crossorigin="anonymous"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -26,6 +26,10 @@ integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0
 </head>
 <body>
 	<div class="container-fluid">
+		<c:import url="../../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+
 		<div class="row justify-content-center">
 			<form:form modelAttribute="part" action="" method="post">
 				<div class="form-group">
@@ -55,8 +59,8 @@ integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0
 				<div class="form-group">
 					<input type="submit" value="登録" class="form-control">
 				</div>
-				<form:hidden path="registerd"/>
-				<form:hidden path="update"/>
+				<form:hidden path="registerd" />
+				<form:hidden path="update" />
 			</form:form>
 		</div>
 	</div>

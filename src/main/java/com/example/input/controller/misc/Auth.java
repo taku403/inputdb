@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.input.controller.Init;
 import com.example.input.dao.misc.department.DepartmentDao;
 import com.example.input.dao.misc.employee.EmployeeDao;
 import com.example.input.domain.AddGroup;
@@ -27,7 +28,7 @@ import com.example.input.domain.misc.admin.Employee;
  *ログアウトの管理
  */
 @Controller
-public class Auth {
+public class Auth extends Init{
 
 	@Autowired
 	private EmployeeDao employeeDao;
@@ -35,16 +36,23 @@ public class Auth {
 	private DepartmentDao departmentDao;
 
 	@RequestMapping(value = { "/", "/login" })
-	public String loginGet(Model model,HttpSession session) {
+	public String loginGet(Model model, HttpSession session) {
 
-		String loginId = (String)session.getAttribute("loginId");
-		if( loginId != null) {
+		String loginId = (String) session.getAttribute("loginId");
+		System.out.println("ログインID：" + loginId);
+		if (loginId != null) {
 
+			model.addAttribute("employee", new Employee());
 			model.addAttribute("loginId", loginId);
-		}
-		model.addAttribute("employee", new Employee());
 
-		return "login";
+			return "login";
+		} else {
+
+			model.addAttribute("notLogin", "ログインしてください。");
+			model.addAttribute("employee", new Employee());
+
+			return "login";
+		}
 
 	}
 
@@ -59,7 +67,7 @@ public class Auth {
 			if (loginEmployee != null) {
 
 				session.setAttribute("loginId", loginEmployee.getLoginId());
-				System.out.println(loginEmployee.getLoginId());
+				model.addAttribute("loginName", loginEmployee.getName());
 				return "redirect:/admin/index";
 			} else {
 				model.addAttribute("loginErr", "ログインIDかログインパスワードが間違っています。");
@@ -71,20 +79,27 @@ public class Auth {
 		return "login";
 	}
 
+	@RequestMapping(value="/logout")
+	public String registerGet(HttpServletRequest request) {
+
+		request.getSession().invalidate();
+
+		return "forward:/login";
+	}
+
 	@RequestMapping(value = "/register")
-	public String newGet(Model model) throws Exception {
+	public String registerGet(Model model) throws Exception {
 
 		List<Department> departmentList = departmentDao.findAll();
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
 		model.addAttribute("departments", departmentList);
 
-
 		return "register";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String newPost(@Validated(AddGroup.class) Employee employee, Errors errors, Model model,
+	public String registerPost(@Validated(AddGroup.class) Employee employee, Errors errors, Model model,
 			HttpServletRequest request)
 			throws Exception {
 

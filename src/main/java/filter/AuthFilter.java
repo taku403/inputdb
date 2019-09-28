@@ -52,12 +52,20 @@ public class AuthFilter implements Filter {
 
 					System.out.println("fail call loginFilter");
 					res.sendRedirect("/input/login");
+
 					return;
+				}
+				else {
+
+					req.setAttribute("loginId", (String)session.getAttribute("loginId"));
+
 				}
 			}
 		}
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
+
+		request.setAttribute("loginId", (String)session.getAttribute("loginId"));
 	}
 
 	/**

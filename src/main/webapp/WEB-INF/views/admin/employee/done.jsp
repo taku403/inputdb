@@ -25,7 +25,12 @@
 <title>従業員追加</title>
 </head>
 <body>
+
 	<div class="container-fluid">
+		<c:import url="../../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+
 		<div class="row justify-content-center">
 			<table class="table table-bordered">
 				<thead>
@@ -50,7 +55,8 @@
 			</table>
 		</div>
 		<div class="row justify-content-center">
-			<a class="btn btn-primary" href='<spring:url value="/admin/employee/list"></spring:url>'>戻る</a>
+			<a class="btn btn-primary"
+				href='<spring:url value="/admin/employee/list"></spring:url>'>戻る</a>
 		</div>
 	</div>
 </body>

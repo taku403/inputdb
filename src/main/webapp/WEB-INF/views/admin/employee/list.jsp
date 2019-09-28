@@ -22,10 +22,15 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<title></title>
+	<script src="/js/common.js" type="text/javascript"></script>
+<title>新規登録</title>
 </head>
 <body>
 	<div class="container-fluid">
+		<c:import url="../../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+
 		<div class="row justify-content-center">
 			<table class="table table-bodered table-striped">
 				<thead>
@@ -59,7 +64,8 @@
 			</table>
 		</div>
 		<div class="row justify-content-center">
-				<a class="btn btn-primary" href="<spring:url value="/admin/employee/add"/>">追加</a>
+			<a class="btn btn-primary"
+				href="<spring:url value="/admin/employee/add"/>">追加</a>
 		</div>
 	</div>
 </body>

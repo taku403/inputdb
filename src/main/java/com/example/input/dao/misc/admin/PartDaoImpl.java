@@ -43,6 +43,7 @@ public class PartDaoImpl extends HibernateORM implements PartDao {
 		// TODO 自動生成されたメソッド・スタブ
 		return (Part)getSession().createCriteria(Part.class)
 				.setFetchMode("supplier", FetchMode.JOIN)
+				.setFetchMode("location", FetchMode.JOIN)
 				.add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
@@ -52,6 +53,7 @@ public class PartDaoImpl extends HibernateORM implements PartDao {
 		// TODO 自動生成されたメソッド・スタブ
 		return getSession().createCriteria(Part.class)
 				.setFetchMode("supplier", FetchMode.JOIN)
+				.setFetchMode("location", FetchMode.JOIN)
 				.list();
 	}
 }

@@ -22,11 +22,14 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+	<script src="/js/common.js" type="text/javascript"></script>
 <title>管理マスタ</title>
 </head>
 <body>
 	<div class="container-fluid">
-	<c:import url="../header.jsp"></c:import>
+	<c:import url="../header.jsp">
+	<c:param name="loginId" value="${loginId}"></c:param>
+	</c:import>
 		<div class="row justify-content-center ">
 			<div class="col-md-6">
 				<table class="table table-striped table-bordered">

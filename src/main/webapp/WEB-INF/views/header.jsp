@@ -38,21 +38,20 @@
 							href='<spring:url value="/plant/etc"></spring:url>'>その他</a>
 					</div></li>
 			</ul>
-			<div class="row">
-				<c:if test="${not empty param.loginId }">
-					<p class="col-sm-8">
-						<c:out value="${param.loginId }" />
-						さん
-					</p>
-					<p class="col-sm-4">
-						<a href='<spring:url value="/logout"></spring:url>'>ログアウト</a>
-					</p>
-				</c:if>
-				<p class="col-sm-8">ゲストさん</p>
-				<p class="col-sm-4">
-					<a href="<spring:url value="/login"/>">ログイン</a>
-				</p>
-			</div>
+			<ul class="navbar-nav ml-auto">
+				<c:choose>
+					<c:when test="${not empty loginId }">
+						<li class="nav-item"><a class="nav-link disabled">こんにちは、
+								<c:out value="${loginId }" /> さん
+						</a></li>
+						<li class="nav-item"><a class="nav-link btn btn-danger text-light"
+							href="<spring:url value="/logout"/>">ログアウト</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item disabled"><a class="nav-link">こんにちは、ゲストさん</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
 		</div>
 	</nav>
 </header>
