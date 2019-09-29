@@ -4,6 +4,7 @@ public class Location {
 
 	private Integer id;
 	private String name;
+	private String note;
 
 	public Integer getId() {
 		return id;
@@ -16,5 +17,11 @@ public class Location {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 }

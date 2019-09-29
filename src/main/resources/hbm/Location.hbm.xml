@@ -8,5 +8,6 @@
 			<generator class="native" />
 		</id>
 		<property name="name" column="name" type="string"></property>
+		<property name="note" column="note" type="string"></property>
 	</class>
 </hibernate-mapping>

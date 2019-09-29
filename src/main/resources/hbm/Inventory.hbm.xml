@@ -9,7 +9,8 @@
 			<generator class="native" />
 		</id>
 		<many-to-one name="part" column="part_id" />
-		<property name="actual" column="actual" type="integer"></property>
+		<property name="amount" column="amount" type="integer"></property>
+		<property name="updated" column="updated" type="timestamp"></property>
 		<many-to-one name="location" column="location_id" ></many-to-one>
 	</class>
 </hibernate-mapping>

@@ -25,21 +25,32 @@
 <title>場所一覧</title>
 </head>
 <body>
-	<c:import url="../header.jsp">
-		<c:param name="loginId" value="${loginId }"></c:param>
-	</c:import>
 	<div class="container-fluid">
-		<div class="row justify-content-center">
-			<c:import url="../header.jsp"></c:import>
+		<c:import url="../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+		<div class="row ">
+			<h1 class="h1 col-sm-4">倉庫情報</h1>
+			<h2 class="h2 text-muted col-sm-7">倉庫を選択してください</h2>
+			<h2 class="h2 col-sm-1"><a class=" h2 btn btn-secondary text-light" href="<spring:url value="/inventory/location/edit" />">修正をする</a></h2>
 		</div>
-		<nav class="nav row">
-			<c:forEach>
-				<li class="nav-item col-sm-3"><a class="nav-link"
-					href="list/<c:out value="${item.id}"/>">
-						<c:out value="${location.name }" />倉庫
-				</a></li>
-			</c:forEach>
-		</nav>
+		<div class="row justify-content-center ">
+			<c:if test="${empty locations}">
+				<p class="col-sm text-danger">倉庫情報が登録されてません</p>
+			</c:if>
+			<ul class="nav justify-content-center">
+				<c:forEach var="location" items="${locations}">
+					<li class="nav-item col-sm-3 border">
+					<a
+						class="nav-link btn btn-info"
+						href="list/<c:out value="${location.id}"/>"> <c:out
+								value="${location.name }" />倉庫 <br>備考：<small class=" text-light"><c:out value="${location.note }"/></small>
+					</a></li>
+				</c:forEach>
+				<li class="nav-item col-sm-12"><a
+					class="nav-link btn btn-primary text-light" href="<spring:url value="/inventory/location/add" />">新たに倉庫を追加する</a></li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
