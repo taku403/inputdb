@@ -3,7 +3,6 @@ package com.example.input.controller.misc.receiving;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.input.dao.misc.admin.PartDao;
@@ -23,11 +22,13 @@ public class ReceivingController {
 	private OrderDao orderDao;
 	@Autowired
 	private QuantityTypeDao quantityTypeDao;
+	private String path = "/receiving/";
 
 	@RequestMapping(value = "/receiving/form")
-	String formGet(@ModelAttribute Receiving receiving, Model model) {
+	String formGet(Model model) {
 
-		return null;
+		model.addAttribute("receiving", new Receiving());
+		return path + "form";
 	}
 
 }

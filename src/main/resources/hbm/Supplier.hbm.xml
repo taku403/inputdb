@@ -11,5 +11,6 @@
 		<property name="name" column="name" type="string"></property>
 		<property name="address" column="address" type="string"></property>
 		<property name="note" column="note" type="string"></property>
+		<property name="created" column="created" type="timestamp"></property>
 	</class>
 </hibernate-mapping>

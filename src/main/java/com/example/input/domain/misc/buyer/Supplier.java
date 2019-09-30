@@ -1,5 +1,7 @@
 package com.example.input.domain.misc.buyer;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.example.input.domain.AddGroup;
@@ -13,6 +15,7 @@ public class Supplier {
 	@NotBlank(groups = {AddGroup.class,EditGroups.class})
 	private String address;
 	private String note;
+	private Date created;
 
 	public Integer getId() {
 		return id;
@@ -46,4 +49,11 @@ public class Supplier {
 		this.note = note;
 	}
 
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 }

@@ -20,6 +20,7 @@ public class Receiving {
 	private QuantityType quantityType;
 	private Date receptionDay;
 	private Employee employee;
+	private String barcode;
 
 	public Integer getId() {
 		return id;
@@ -64,5 +65,10 @@ public class Receiving {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
+	public String getBarcode() {
+		return barcode;
+	}
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
 }

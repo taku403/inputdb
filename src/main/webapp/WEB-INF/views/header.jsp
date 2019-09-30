@@ -48,7 +48,7 @@
 							href="<spring:url value="/logout"/>">ログアウト</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item disabled"><a class="nav-link">こんにちは、ゲストさん</a></li>
+						<li class="nav-item disabled"><a class="nav-link">ゲストさん</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

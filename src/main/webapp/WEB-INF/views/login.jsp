@@ -30,38 +30,39 @@
 		<c:import url="header.jsp">
 			<c:param name="loginId" value="${loginId}" />
 		</c:import>
-		<h2 class="h5 text-danger row justify-content-center" style="margin-top: 15px;">
+		<h2 class="h5 text-danger row justify-content-center"
+			style="margin-top: 15px;">
 			<c:out value="${notLogin}" />
 		</h2>
 		<div class="row justify-content-center">
-			<div class="col-sm-4 border" style="padding: 10px; border-radius: 8px;">
-				<div class="row justify-content-center">
-					<form:form modelAttribute="employee" action="" method="post">
-						<c:if test="${not empty loginErr }">
-							<p class="text-danger">
-								<c:out value="${loginErr}" />
-							</p>
-						</c:if>
-						<div class="form-group">
-							<form:errors cssClass="text-danger" element="p" path="loginId" />
-							<label for="loginId">ログインID </label>
-							<form:input cssClass="form-control" path="loginId" />
-						</div>
-						<div class="form-group">
-							<form:errors cssClass="text-danger" method="loginPass" />
-							<label for="loginPass">ログインパスワード</label>
-							<form:input cssClass="form-control" path="loginPass" />
-						</div>
-						<div class="form-group">
-							<input class="form-control btn btn-primary" type="submit"
-								value="ログイン">
-						</div>
-						<div class="form-group">
-							<a class="form-control btn btn-success" href="<spring:url value="/register"/>">新規登録</a>
-						</div>
-					</form:form>
+			<form:form cssClass="row justifycontent-center border"
+				style="padding: 10px; border-radius: 8px;" modelAttribute="employee"
+				action="" method="post">
+				<div class="form-group col-sm-12">
+					<label for="loginId">ログインID </label>
+					<c:if test="${not empty loginErr }">
+						<span class="text-danger">
+							<c:out value="${loginErr}" />
+						</span>
+					</c:if>
+
+					<form:errors cssClass="text-danger" path="loginId" />
+					<form:input cssClass="form-control" path="loginId" />
 				</div>
-			</div>
+				<div class="form-group col-sm-12">
+					<label for="loginPass">ログインパスワード</label>
+					<form:errors cssClass="text-danger" path="loginPass" />
+					<form:input cssClass="form-control" path="loginPass" />
+				</div>
+				<div class="form-group col-sm-12">
+					<input class="form-control btn btn-primary" type="submit"
+						value="ログイン">
+				</div>
+				<div class="form-group col-sm-12">
+					<a class="form-control btn btn-success"
+						href="<spring:url value="/register"/>">新規登録</a>
+				</div>
+			</form:form>
 		</div>
 	</div>
 </body>

@@ -70,7 +70,7 @@ public class Auth extends Init{
 				model.addAttribute("loginName", loginEmployee.getName());
 				return "redirect:/admin/index";
 			} else {
-				model.addAttribute("loginErr", "ログインIDかログインパスワードが間違っています。");
+				model.addAttribute("loginErr", "ログインIDかログインパスワードが正しくありません。");
 			}
 		}
 
@@ -83,7 +83,7 @@ public class Auth extends Init{
 	public String registerGet(Model model,HttpServletRequest request) {
 
 		request.getSession().invalidate();
-		return "login";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/register")

@@ -1,5 +1,6 @@
 package com.example.input.dao.misc.buyer;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,6 +18,7 @@ public class SupplierDaoImpl extends HibernateORM implements SupplierDao {
 	@Override
 	public void insert(Supplier supplier) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+		supplier.setCreated(new Date());
 		getSession().save(supplier);
 	}
 

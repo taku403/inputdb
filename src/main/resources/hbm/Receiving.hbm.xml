@@ -11,8 +11,9 @@
 		<many-to-one name="part" column="part_id"></many-to-one>
 		<property name="quantity" column="quantity" type="string"></property>
 		<many-to-one name="quantityType" column="quantity_type_id" />
-		<property name="receptionDay" column="reception_day"></property>
+		<property name="receptionDay" column="reception_day" type="string"></property>
 		<many-to-one name="order" column="order_id"></many-to-one>
 		<many-to-one name="employee" column="employee_id"></many-to-one>
+		<property name="barcode" column="barcode" type="string"></property>
 	</class>
 </hibernate-mapping>
