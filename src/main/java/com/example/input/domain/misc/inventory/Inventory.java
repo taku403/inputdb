@@ -3,18 +3,20 @@ package com.example.input.domain.misc.inventory;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.example.input.domain.AddGroup;
+import com.example.input.domain.EditGroups;
 import com.example.input.domain.misc.admin.Part;
 
 public class Inventory {
 
 	private Integer id;
-	@NotNull
 	private Part part;
+	@NotBlank(groups= {AddGroup.class,EditGroups.class})
 	@Min(0)
 	private Integer amount;
-	@NotNull
 	private Location location;
 	private Date updated;
 	public Integer getId() {
@@ -47,6 +49,5 @@ public class Inventory {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
 
 }

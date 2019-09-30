@@ -16,7 +16,6 @@ import com.example.input.domain.misc.buyer.Order;
 @Repository
 public class OrderDaoImpl extends HibernateORM implements OrderDao {
 
-
 	@Override
 	public void insert(Order order) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
@@ -41,17 +40,20 @@ public class OrderDaoImpl extends HibernateORM implements OrderDao {
 	@Override
 	public Order findById(Integer id) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return (Order)getSession().createCriteria(Order.class).setFetchMode("part", FetchMode.JOIN)
-		.setFetchMode("epmloyee", FetchMode.JOIN)
-		.add(Restrictions.eq("id", id)).uniqueResult();
+		return (Order) getSession().createCriteria(Order.class)
+				.setFetchMode("part", FetchMode.JOIN)
+				.setFetchMode("employee", FetchMode.JOIN)
+				.add(Restrictions.eq("id", id)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> findAll() throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return getSession().createCriteria(Order.class).setFetchMode("part", FetchMode.JOIN)
+		return getSession().createCriteria(Order.class)
+				.setFetchMode("part", FetchMode.JOIN)
 				.setFetchMode("employee", FetchMode.JOIN)
+				.setFetchMode("part.supplier", FetchMode.JOIN)
 				.list();
 	}
 }

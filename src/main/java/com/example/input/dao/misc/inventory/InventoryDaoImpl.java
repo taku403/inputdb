@@ -1,5 +1,6 @@
 package com.example.input.dao.misc.inventory;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,7 @@ public class InventoryDaoImpl extends HibernateORM implements InventoryDao {
 	@Override
 	public void insert(Inventory inventory) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+		inventory.setUpdated(new Date());
 		getSession().save(inventory);
 
 	}
@@ -27,6 +29,7 @@ public class InventoryDaoImpl extends HibernateORM implements InventoryDao {
 	@Override
 	public void update(Inventory inventory) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+		inventory.setUpdated(new Date());
 		getSession().update(inventory);
 	}
 

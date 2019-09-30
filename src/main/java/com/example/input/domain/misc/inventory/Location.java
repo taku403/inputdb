@@ -1,8 +1,14 @@
 package com.example.input.domain.misc.inventory;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.example.input.domain.AddGroup;
+import com.example.input.domain.EditGroups;
+
 public class Location {
 
 	private Integer id;
+	@NotBlank(groups= {AddGroup.class,EditGroups.class})
 	private String name;
 	private String note;
 

@@ -32,7 +32,7 @@
 		<div class="row ">
 			<h1 class="h1 col-sm-4">倉庫情報</h1>
 			<h2 class="h2 text-muted col-sm-7">倉庫を選択してください</h2>
-			<h2 class="h2 col-sm-1"><a class=" h2 btn btn-secondary text-light" href="<spring:url value="/inventory/location/edit" />">修正をする</a></h2>
+			<h2 class="h2 col-sm-1"><a class=" h2 btn btn-secondary text-light" href="<spring:url value="/inventory/location/edit" />">修正</a></h2>
 		</div>
 		<div class="row justify-content-center ">
 			<c:if test="${empty locations}">

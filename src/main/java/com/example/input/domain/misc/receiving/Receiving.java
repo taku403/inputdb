@@ -3,22 +3,22 @@ package com.example.input.domain.misc.receiving;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
+import com.example.input.domain.AddGroup;
+import com.example.input.domain.EditGroups;
 import com.example.input.domain.misc.admin.Employee;
 import com.example.input.domain.misc.admin.Part;
+import com.example.input.domain.misc.buyer.Order;
 
 public class Receiving {
 
 	private Integer id;
-	@NotNull
+	private Order order;
 	private Part part;
-	@Min(1)
+	@Min(value=0,groups={AddGroup.class,EditGroups.class})
 	private Integer quantity;
-	@NotNull
 	private QuantityType quantityType;
 	private Date receptionDay;
-	@NotNull
 	private Employee employee;
 
 	public Integer getId() {
@@ -46,16 +46,23 @@ public class Receiving {
 	public void setQuantityType(QuantityType quantityType) {
 		this.quantityType = quantityType;
 	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 	public Date getReceptionDay() {
 		return receptionDay;
 	}
 	public void setReceptionDay(Date receptionDay) {
 		this.receptionDay = receptionDay;
 	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 }

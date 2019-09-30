@@ -51,6 +51,7 @@ public class AuthFilter implements Filter {
 				if (session.getAttribute("loginId") == null) {
 
 					System.out.println("fail call loginFilter");
+					req.setAttribute("entryLogin", "ログインしてください");
 					res.sendRedirect("/input/login");
 
 					return;

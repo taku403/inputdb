@@ -1,5 +1,6 @@
 package com.example.input.controller.misc.buyer;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -7,9 +8,15 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,8 +44,6 @@ public class OrderController extends Init {
 	String listGet(Model model) throws Exception {
 
 		List<Order> orderList = orderDao.findAll();
-		System.out.println("called ordar.findall");
-		System.err.println("order size = " + orderList.size());
 		model.addAttribute("orders", orderList);
 
 		return path + "list";
@@ -46,80 +51,87 @@ public class OrderController extends Init {
 	}
 
 	@RequestMapping(value = "/buyer/order/add")
-	String addGet(Model model, HttpSession session) throws Exception {
+	String addGet(@ModelAttribute Order order, Model model, HttpSession session) throws Exception {
 
 		List<Part> partList = partDao.findAll();
-		Order order = new Order();
-		order.setPart(new Part());
-		String loginId = (String) session.getAttribute("loginId");
-		Employee employee = employeeDao.findByloginId(loginId.toString());
+		Employee employee = getByEmployee((String) session.getAttribute("loginId"));
 		order.setEmployee(employee);
 		model.addAttribute("parts", partList);
 		model.addAttribute("order", order);
-		model.addAttribute("name", employee.getName());
-
-		System.out.println(employee.getName());
 
 		return path + "add";
 	}
 
 	@RequestMapping(value = "/buyer/order/add", method = RequestMethod.POST)
-	String addPost(@Valid Order order, Errors errors, Model model, HttpSession session) throws Exception {
-		String loginId = (String) session.getAttribute("loginId");
-		Employee employee = employeeDao.findByloginId(loginId.toString());
+	String addPost(@Valid Order order, Errors errors, Model model, HttpSession session)
+			throws Exception {
+
+		Employee employee = employeeDao.findById(order.getEmployee().getId());
 		order.setEmployee(employee);
-		System.out.println("call date");
-		order.setOrderDate(new Date());
-		System.out.println(order.getOrderDate());
-		System.out.println("call quant");
-		System.out.println(order.getQuantity());
-		System.out.println("call reorderpoint");
-		System.out.println(order.getReorder());
-		System.out.println("call part");
-		Part part = partDao.findById(order.getPart().getId());
-		System.out.println(part.getName());
-		order.setPart(part);
-
-			System.out.println("call add post");
+		if (!errors.hasErrors()) {
+			Part part = partDao.findById(order.getPart().getId());
+			order.setPart(part);
 			orderDao.insert(order);
-
-
+			return "redirect:/" + path + "list";
+		}
 
 		List<Part> partsList = partDao.findAll();
-		List<Employee> employeeList = employeeDao.findAll();
 		model.addAttribute("order", order);
 		model.addAttribute("parts", partsList);
-		model.addAttribute("employees", employeeList);
-		System.out.println("erro order");
-		return "redirect:/" + path + "list";
-
+		return path + "add";
 	}
 
 	@RequestMapping(value = "/buyer/order/delete/{id}")
-	String deleteGet(@PathVariable Integer id) throws Exception {
+	String deleteGet(@PathVariable Integer id, Model model) throws Exception {
 
 		Order order = orderDao.findById(id);
 
 		orderDao.delete(order);
-
 		return "forward:/" + path + "list";
 	}
 
-	@RequestMapping(value = "/buyre/order/delete/{id}")
-	String updateGet(@PathVariable Integer id, Model model) throws Exception {
-
+	@RequestMapping(value = "/buyer/order/edit/{id}")
+	String updateGet(@PathVariable Integer id, Model model, HttpSession session) throws Exception {
+		System.out.println("call edit");
 		Order order = orderDao.findById(id);
-
+		Part part = order.getPart();
+		List<Part> partList = partDao.findAll();
+		Employee employee = getByEmployee((String) session.getAttribute("loginId"));
+		order.setEmployee(employee);
+		model.addAttribute("part", part);
+		model.addAttribute("parts", partList);
 		model.addAttribute("order", order);
-
+		model.addAttribute("submit", "適用");
 		return path + "edit";
 	}
 
-	@RequestMapping(value = "/buyre/order/delete/{id}", method = RequestMethod.POST)
-	String updatePost(Order order, Errors errors, Model model) throws Exception {
+	@RequestMapping(value = "/buyer/order/edit/{id}", method = RequestMethod.POST)
+	String updatePost(@ModelAttribute @Validated Order order, BindingResult errors, Model model) throws Exception {
+		System.out.println("call post edit");
+		Part part = partDao.findById(order.getPart().getId());
+		Employee employee = employeeDao.findById(order.getEmployee().getId());
+		order.setEmployee(employee);
+		order.setPart(part);
+		if (!errors.hasErrors()) {
 
-		orderDao.update(order);
-		return path + "list";
+			orderDao.update(order);
+			return "forward:/" + path + "list";
 
+		}
+			System.out.println(errors);
+
+		List<Part> partList = partDao.findAll();
+		model.addAttribute("parts", partList);
+		model.addAttribute("order", order);
+		return path + "edit";
 	}
+
+	@InitBinder
+	public void Binder(WebDataBinder binder) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		sdf.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
+
 }

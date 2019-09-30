@@ -4,14 +4,15 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping
 	package="com.example.input.domain.misc.receiving">
-	<class name="receiving" table="receiving">
+	<class name="Receiving" table="receiving">
 		<id name="id" column="id">
 			<generator class="native" />
 		</id>
 		<many-to-one name="part" column="part_id"></many-to-one>
 		<property name="quantity" column="quantity" type="string"></property>
 		<many-to-one name="quantityType" column="quantity_type_id" />
-		<many-to-one name="employee" column="employee_id" />
 		<property name="receptionDay" column="reception_day"></property>
+		<many-to-one name="order" column="order_id"></many-to-one>
+		<many-to-one name="employee" column="employee_id"></many-to-one>
 	</class>
 </hibernate-mapping>

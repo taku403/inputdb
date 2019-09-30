@@ -80,11 +80,10 @@ public class Auth extends Init{
 	}
 
 	@RequestMapping(value="/logout")
-	public String registerGet(HttpServletRequest request) {
+	public String registerGet(Model model,HttpServletRequest request) {
 
 		request.getSession().invalidate();
-
-		return "forward:/login";
+		return "login";
 	}
 
 	@RequestMapping(value = "/register")

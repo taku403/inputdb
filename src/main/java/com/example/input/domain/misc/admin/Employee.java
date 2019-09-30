@@ -9,23 +9,22 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.example.input.domain.AddGroup;
+import com.example.input.domain.EditGroups;
 import com.example.input.domain.LoginGroup;
 
 public class Employee {
 
 	private Integer id;
-	@NotBlank(groups = { AddGroup.class })
+	@NotBlank(groups = { AddGroup.class,EditGroups.class })
 	private String name;
-	@NotNull(groups = { AddGroup.class })
+	@NotNull(groups = { AddGroup.class,EditGroups.class })
 	private Department department;
 	private String phone;
-	@NotBlank(groups = { AddGroup.class })
-	@NotNull
 	private String address;
 	private String note;
-	@NotBlank(groups = { AddGroup.class, LoginGroup.class })
+	@NotBlank(groups = { AddGroup.class, LoginGroup.class,EditGroups.class })
 	private String loginPass;
-	@NotBlank(groups = { AddGroup.class, LoginGroup.class })
+	@NotBlank(groups = { AddGroup.class, LoginGroup.class,EditGroups.class })
 	private String loginId;
 	private Date update;
 	private Date registerd;

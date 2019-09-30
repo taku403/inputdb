@@ -35,7 +35,7 @@ public class SupplierController {
 	String addGet(Model model) {
 
 		model.addAttribute("supplier", new Supplier());
-
+		System.out.println("return add");
 		return path + "add";
 
 	}
@@ -46,7 +46,7 @@ public class SupplierController {
 		if(!errors.hasErrors()) {
 
 			supplierDao.insert(supplier);
-			return path + "list";
+			return "redirect:/" + path + "list";
 		}
 
 
@@ -70,9 +70,8 @@ public class SupplierController {
 
 		if(!errors.hasErrors()) {
 
-			supplierDao.insert(supplier);
-
-			return path + "list";
+			supplierDao.update(supplier);
+			return "redirect:/" + path + "list";
 		}
 
 		model.addAttribute("supplier", supplier);
@@ -85,8 +84,8 @@ public class SupplierController {
 
 		Supplier supplier = supplierDao.findById(id);
 		supplierDao.delete(supplier);
-
-
-		return path + "list";
+		model.addAttribute("supplier", supplier);
+		model.addAttribute("done", "削除完了");
+		return "redirect:/" + path + "done";
 	}
 }

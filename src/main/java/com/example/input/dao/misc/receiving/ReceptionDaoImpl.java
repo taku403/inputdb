@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.example.input.dao.HibernateORM;
-import com.example.input.domain.misc.admin.Employee;
 import com.example.input.domain.misc.receiving.Reception;
 
 @Transactional
@@ -50,10 +48,10 @@ public class ReceptionDaoImpl extends HibernateORM implements ReceptionDao {
 	}
 
 	@Override
-	public Reception findByEmployee(Employee employee) throws Exception {
+	public Reception findByLoginId(String loginId) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		return (Reception)getSession().createCriteria(Reception.class).setFetchMode("employee", FetchMode.JOIN)
-				.add(Restrictions.eq("employee.id", employee.getId())).uniqueResult();
+		return (Reception)getSession().createCriteria(Reception.class)
+				.add(Restrictions.eq("loginId", loginId)).uniqueResult();
 	}
 
 

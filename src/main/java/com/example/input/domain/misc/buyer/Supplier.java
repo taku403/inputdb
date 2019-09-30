@@ -2,12 +2,15 @@ package com.example.input.domain.misc.buyer;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.example.input.domain.AddGroup;
+import com.example.input.domain.EditGroups;
+
 public class Supplier {
 
 	private Integer id;
-	@NotBlank
+	@NotBlank(groups = {AddGroup.class,EditGroups.class})
 	private String name;
-	@NotBlank
+	@NotBlank(groups = {AddGroup.class,EditGroups.class})
 	private String address;
 	private String note;
 

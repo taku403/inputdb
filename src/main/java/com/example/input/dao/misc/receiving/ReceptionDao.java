@@ -2,7 +2,6 @@ package com.example.input.dao.misc.receiving;
 
 import java.util.List;
 
-import com.example.input.domain.misc.admin.Employee;
 import com.example.input.domain.misc.receiving.Reception;
 
 public interface ReceptionDao {
@@ -12,5 +11,5 @@ public interface ReceptionDao {
 	void delete(Reception recipient) throws Exception;
 	Reception findById(Integer id) throws Exception;
 	List<Reception> findAll() throws Exception;
-	Reception findByEmployee(Employee employee) throws Exception;
+	Reception findByLoginId(String loginId) throws Exception;
 }

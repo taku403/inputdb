@@ -6,20 +6,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<c:import url="../meta.jsp"></c:import>
-<title>在庫編集</title>
+<meta charset="UTF-8" />
+<c:import url="../../meta.jsp"></c:import>
+<title>編集</title>
 </head>
 <body>
 	<div class="container-fluid">
-		<c:import url="../header.jsp"></c:import>
-		<div class="row">
-			<h1 class="h3 col-sm-12 text-muted">
-				<c:out value="${inventory.part.name}" />
-			</h1>
-		</div>
-		<c:import url="form.jsp">
-			<c:param name="inventory" value="${inventory}"></c:param>
-			<c:param name="partsLocations" value="${partsLocations }"></c:param>
+		<c:import url="../../header.jsp">
+			<c:param name="loginId" value="${loginId }"></c:param>
+		</c:import>
+
+		<c:import url="order.jsp">
+			<c:param name="order" value="${order}"></c:param>
 			<c:param name="submit" value="${submit}"></c:param>
 		</c:import>
 	</div>

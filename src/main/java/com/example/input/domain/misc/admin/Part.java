@@ -4,25 +4,27 @@ package com.example.input.domain.misc.admin;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.example.input.domain.AddGroup;
+import com.example.input.domain.EditGroups;
 import com.example.input.domain.misc.buyer.Supplier;
 
 public class Part {
 
 	private Integer id;
 	private String productNo;
-	@NotBlank
+	@NotBlank(groups= {AddGroup.class,EditGroups.class})
 	private String name;
+	@NotBlank(groups= {AddGroup.class,EditGroups.class})
 	@Min(1)
 	private Integer price;
+	@NotBlank(groups= {AddGroup.class,EditGroups.class})
 	@Min(1)
 	private Integer lot;
 	private Date registerd;
 	private Date update;
-	@NotNull
 	private Supplier supplier;
 
 	public Integer getId() {

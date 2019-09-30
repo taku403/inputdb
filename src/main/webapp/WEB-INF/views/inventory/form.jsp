@@ -5,17 +5,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <style>
-.partIsLocation {
+#partLocations {
 	display: none;
 }
 </style>
-<form:form modelAttribute="${inventory}" action="" method="post">
-	<div class="form-group">
-		<label for="select-parts">部品：</label>
-		<form:select id="select-parts" cssClass="form-control" path="part.id"
-			itemLabel="name" itemValue="id" items="${parts}"></form:select>
-	</div>
-	<div class="form-group">
+<form:form modelAttribute="inventory" action="" method="post">
+<form:hidden path="part" />
+<form:hidden path="updated"/>
+<div class="form-group">
+<form:select path="part.id" itemLabel="name" itemValue="id" items="${parts}"></form:select>
+</div>
+		<div class="form-group">
 		<label for="amount">在庫数</label>
 		<form:errors path="amount" element="p" cssClass="text-danger"></form:errors>
 		<form:input id="amount" cssClass="form-control" path="amount" />
@@ -26,10 +26,15 @@
 			items="${locations}"></form:select>
 	</div>
 	<div class="form-group">
-		<input type="submit" class="form-control" value="${submit}">
+		<input type="submit" class="form-control btn btn-secondary" value="<c:out value="${submit}"/>">
 	</div>
 </form:form>
 
-<c:forEach var="partIsLocation" items="${partsIsLocated }"></c:forEach>
-<p class="partsIsLocation"
-	id="partIsLocation-<c:out value="${partIslocation.id}"/>">
+<table id="partsLocations">
+	<tr>
+		<c:forEach var="partLocation" items="${partsLocations }">
+			<td class="partsLocation"
+				id="partsLocation;-<c:out value="${partsLocation.id}"/>"></td>
+		</c:forEach>
+	</tr>
+</table>

@@ -12,19 +12,18 @@ import com.example.input.domain.misc.admin.Part;
 public class Order {
 
 	private Integer id;
-	@NotNull
 	private Part part;
 	private Date orderDate;
+	@NotNull
 	@Min(1)
 	private Integer quantity;
+	@NotNull
 	@Min(1)
 	private Integer reorder;
-	@NotNull
 	private Employee employee;
 
 
 	public Order() {
-		this.part = new Part();
 	}
 
 	public Integer getId() {
@@ -51,12 +50,6 @@ public class Order {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 
 	public Integer getReorder() {
 		return reorder;
@@ -66,5 +59,12 @@ public class Order {
 		this.reorder = reorder;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 }
