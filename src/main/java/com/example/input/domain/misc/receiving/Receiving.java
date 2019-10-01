@@ -3,36 +3,35 @@ package com.example.input.domain.misc.receiving;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.example.input.domain.AddGroup;
 import com.example.input.domain.EditGroups;
 import com.example.input.domain.misc.admin.Employee;
-import com.example.input.domain.misc.admin.Part;
 import com.example.input.domain.misc.buyer.Order;
 
 public class Receiving {
 
 	private Integer id;
+	@NotNull(groups= {AddGroup.class,EditGroups.class})
 	private Order order;
-	private Part part;
 	@Min(value=0,groups={AddGroup.class,EditGroups.class})
 	private Integer quantity;
-	private QuantityType quantityType;
-	private Date receptionDay;
+	private String complete;
+	private Date created;
+	@NotNull(groups= {AddGroup.class,EditGroups.class})
 	private Employee employee;
-	private String barcode;
 
+
+	public Receiving() {
+		this.complete = "off";
+		this.created = new Date();
+	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Part getPart() {
-		return part;
-	}
-	public void setPart(Part part) {
-		this.part = part;
 	}
 	public Integer getQuantity() {
 		return quantity;
@@ -41,17 +40,18 @@ public class Receiving {
 		this.quantity = quantity;
 	}
 
-	public QuantityType getQuantityType() {
-		return quantityType;
+
+	public String getComplete() {
+		return complete;
 	}
-	public void setQuantityType(QuantityType quantityType) {
-		this.quantityType = quantityType;
+	public void setComplete(String complete) {
+		this.complete = complete;
 	}
-	public Date getReceptionDay() {
-		return receptionDay;
+	public Date getCreated() {
+		return created;
 	}
-	public void setReceptionDay(Date receptionDay) {
-		this.receptionDay = receptionDay;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 	public Order getOrder() {
 		return order;
@@ -64,11 +64,5 @@ public class Receiving {
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-	public String getBarcode() {
-		return barcode;
-	}
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
 	}
 }

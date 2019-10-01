@@ -22,7 +22,7 @@
 					href="<spring:url value="/inventory/index" />">在庫</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="<spring:url value="/buyer/index"/>">注文</a></li>
-				<li class="nav-item"><a class="nav-link" href="recipt/index">受付</a></li>
+				<li class="nav-item"><a class="nav-link" href="<spring:url value="/receiving/form"/>">受付</a></li>
 
 				<li class="nav-item dropdown"><a href="#"
 					class="nav-link dropdown-toggle" id="navbarDropdown" role="button"

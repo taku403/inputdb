@@ -48,9 +48,16 @@
 					</a></li>
 				</c:forEach>
 				<li class="nav-item col-sm-12"><a
-					class="nav-link btn btn-primary text-light" href="<spring:url value="/inventory/location/add" />">新たに倉庫を追加する</a></li>
+					class="nav-link add-btn btn btn-primary text-light" href="<spring:url value="#"/>">新たに倉庫を追加する</a></li>
 			</ul>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$('.add-btn').click(function(){
+			window.open("location/add","倉庫追加","width=300,height=300");
+		})
+	});
+	</script>
 </body>
 </html>

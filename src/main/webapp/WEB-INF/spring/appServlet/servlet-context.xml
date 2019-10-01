@@ -70,7 +70,6 @@
 				<value>hbm/Reception.hbm.xml</value>
 				<value>hbm/Inventory.hbm.xml</value>
 				<value>hbm/Receiving.hbm.xml</value>
-				<value>hbm/QuantityType.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

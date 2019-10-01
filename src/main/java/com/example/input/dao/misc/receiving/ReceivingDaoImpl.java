@@ -19,7 +19,7 @@ public class ReceivingDaoImpl extends HibernateORM implements ReceivingDao {
 	@Override
 	public void insert(Receiving receiving) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		receiving.setReceptionDay(new Date());
+		receiving.setCreated(new Date());
 		getSession().save(receiving);
 
 	}
@@ -27,7 +27,7 @@ public class ReceivingDaoImpl extends HibernateORM implements ReceivingDao {
 	@Override
 	public void update(Receiving receiving) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
-		receiving.setReceptionDay(new Date());
+		receiving.setCreated(new Date());
 		getSession().update(receiving);
 	}
 
@@ -40,10 +40,8 @@ public class ReceivingDaoImpl extends HibernateORM implements ReceivingDao {
 	public Receiving findById(Integer id) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return (Receiving)getSession().createCriteria(Receiving.class)
-				.setFetchMode("part", FetchMode.JOIN)
 				.setFetchMode("employee", FetchMode.JOIN)
 				.setFetchMode("order", FetchMode.JOIN)
-				.setFetchMode("quantityType", FetchMode.JOIN)
 				.add(Restrictions.eq("id", id))
 				.uniqueResult();
 	}
@@ -53,10 +51,8 @@ public class ReceivingDaoImpl extends HibernateORM implements ReceivingDao {
 	public List<Receiving> findAll() throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return getSession().createCriteria(Receiving.class)
-				.setFetchMode("part", FetchMode.JOIN)
 				.setFetchMode("employee", FetchMode.JOIN)
 				.setFetchMode("order", FetchMode.JOIN)
-				.setFetchMode("quantityType", FetchMode.JOIN)
 				.list();
 	}
 

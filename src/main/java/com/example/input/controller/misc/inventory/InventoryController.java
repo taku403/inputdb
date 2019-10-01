@@ -68,6 +68,7 @@ public class InventoryController extends Init{
 		return path + "add";
 	}
 
+
 	@RequestMapping(value = "/inventory/edit/{id}")
 	String editGet(@PathVariable Integer id, Model model) throws Exception {
 
