@@ -39,11 +39,15 @@
 						path="order.id" placeholder="注文番号"/>
 				</div>
 				<div class="form-group">
-					<label for="quantity">受入数</label>
+					<label for="input-quantity">受入数</label>
 					<form:errors cssClass="text-danger" path="quantity"></form:errors>
 					<form:input id="input-quantity" path="quantity"
 						cssClass="form-control" placeholder="受入数量"/>
 				</div>
+				<div class="form-group">
+				<input id="btn-submit" class="btn btn-success form-control" type="submit" value="完了" >
+				</div>
+
 			</form:form>
 		</div>
 		<c:forEach var="order" items="${orders}">
@@ -66,7 +70,7 @@
 						<td><c:out value="${order.part.productNo }" /></td>
 						<td><c:out value="${order.part.name}" /></td>
 						<td><c:out value="${order.part.price}" /></td>
-						<td id="quantity-<c:out value="${order.quantity}"/>"><c:out
+						<td id="quantity-<c:out value="${order.id}"/>"><c:out
 								value="${order.quantity}" /></td>
 						<td><fmt:formatDate value="${order.part.registerd }"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
@@ -80,76 +84,144 @@
 	</div>
 	<script>
 		$(function() {
-
-			// 画面の初期化
+			//以前のテーブル画面を消去するためのIDを保存
+			var prev_ordor_id;
+			var err_flag = false;
+			// 画面の初期化をする
 			init();
-
-			//画面を初期化する
-			function init() {
-				$('.order-tables').hide();
-			}
-
-			//バリデーション関数
-			//注文番号の入力が正しいかチェックする。
-			// 戻り値
-			//成功：注文番号： 失敗：false
-
 			//注文番号入力時の処理
 			$('#input-order-no').on('change', function() {
 				var order_id = $('#input-order-no').val();
-				console.log("order_id -> " + order_id)
 				//入力が正しいかチェックする
 				order_id = check_input_order_id(order_id);
 				//入力が正しい場合は該当するテーブルを描写しテーブルセレクタIDを返す。
 				var order_table_id = show_order_table(order_id);
-				//受け入れ数の入力値が注文数量以下か処理
-				//注文数量の取得
-				var order_quantity =
 			})
 
+			$('#input-quantity').on('change',function(){
+				var order_id = $('#input-order-no').val();
+				//注文数量の取得
+				var order_quantity = get_order_quantity(order_id)
+				//受け入れ数の取得
+				var receiving_quantity = get_check_receiving_quantity();
+				if(receiving_quantity){
+					//注文数と受け入れ数量のチェック
+					var cmp = order_quantity - receiving_quantity;
+					if( 0 > cmp){
+						alert('注文数より受け入れ数量が多いです');
+						$('#input-quantity').val('');
+						return false;
+					}
+					else {
+						return true;
+					}
+				}
+			})
+
+			$('form').submit(function(){
+				if(err_flag){
+					$('#btn-submit').val("入力項目に誤りがあるので完了できません");
+					return false;
+				}
+			})
+
+			//画面を初期化する
+			function init() {
+				$('.order-tables').hide();
+				$('#input-quantity').prop('disabled',true);
+			}
+
+
+
 			//注文番号入力のバリデーション処理をする
-			//成功：注文数 , 失敗：false
+			//成功：order_id , 失敗：false
 			function check_input_order_id(order_id) {
 
 				console.log('order.no -> ' + order_id);
 				if (isNaN(order_id)) {
 					alert("注文番号は数字で入力してください");
+					err_flag = true;
+					$('#input-ordor-no').val('')
+					$('#order-table-no-' + prev_ordor_id).hide();
 					return false;
 				} else if (order_id == 0) {
-					alert("注文番号: 0はありません");
+					alert("注文番号: ０はありません");
+					err_flag = true;
+					$('#input-ordor-no').val('')
+					$('#order-table-no-' + prev_ordor_id).hide();
 					return false;
 				} else {
-
+					err_flag = false;
+					prev_ordor_id = order_id;
 					return order_id;
 				}
 			}
-
+			// check order table is exists;
+			function is_order_table(order_id) {
+				var selector_id = '#order-table-no-' + order_id;
+				if($(selector_id)[0]){
+					err_flag =false;
+					return true;
+				}
+				else {
+					err_flag =true;
+					return false;
+				}
+			}
 			// 引数に指定した注文番号のテーブルを描写する。
 			// 戻り値：
 			// 成功：セレクタID, 存在しない場合：false
 			function show_order_table(order_id) {
 
-				var selector = '#order-table-no-' + order_id;
+				var selector_id = '#order-table-no-' + order_id;
 				//テーブルセレクタが存在するなら描写する。
-				if ($(selector)[0]) {
+				if ($(selector_id)[0]) {
 					$('.ordar-tables').hide();
-					$(selector).show();
+					$(selector_id).show();
+					$('#input-quantity').prop('disabled',false);
+					$('#input-quantity').focus();
+					err_flag = false;
 					return true;
 				} else {
 					alert("該当する注文番号: " + order_id + " は存在しません。");
+					$('#input-order-no').val('');
+					$('#input-order-no').focus();
+					err_flag = true;
 					return false;
 				}
 			}
 
-			var order_id = check_input_order_id();
-			//受入数のバリデーションチェック
-			if (order_id) {
 
+
+			//注文番号の数量を取得する
+			// param: 注文ID
+			// return true: order_quantity;
+			function get_order_quantity(order_id){
+					// 注文数量のセレクタを生成
+					var order_quantity_id = $('#quantity-' + order_id).text();
+					return order_quantity_id;
 			}
-			$('#input-quantity').change(function() {
-				var quantity = $('#input-quantity').val();
+			// 受け入れ数量のバリデーション処理をし受け入れ数量を返す
+			// return success: receiving_quantity; fail: false;
+			function get_check_receiving_quantity(){
+				var input_receiving_ouantity = $('#input-quantity').val();
 
-			})
-		});
+				if(isNaN(input_receiving_ouantity)){
+					alert('数字を入力してください');
+					err_flag = true;
+					return false;
+				}
+				else if(input_receiving_ouantity == 0){
+					alert('1以上を入力してください');
+					err_flag =true;
+					return false;
+				}
+				else {
+					err_flag =false;
+					return input_receiving_ouantity;
+				}
+			}
+
+			});
 	</script>
 </body>

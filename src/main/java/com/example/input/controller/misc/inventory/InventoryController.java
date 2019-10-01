@@ -127,5 +127,4 @@ public class InventoryController extends Init{
 		}
 		return locations;
 	}
-
 }
