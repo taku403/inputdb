@@ -100,8 +100,11 @@
 				console.log("order_id -> " + order_id)
 				//入力が正しいかチェックする
 				order_id = check_input_order_id(order_id);
-				//入力が正しい場合は該当するテーブルを描写する。
-				show_order_table(order_id);
+				//入力が正しい場合は該当するテーブルを描写しテーブルセレクタIDを返す。
+				var order_table_id = show_order_table(order_id);
+				//受け入れ数の入力値が注文数量以下か処理
+				//注文数量の取得
+				var order_quantity =
 			})
 
 			//注文番号入力のバリデーション処理をする
@@ -123,7 +126,7 @@
 
 			// 引数に指定した注文番号のテーブルを描写する。
 			// 戻り値：
-			// 成功：true, 存在しない場合：false
+			// 成功：セレクタID, 存在しない場合：false
 			function show_order_table(order_id) {
 
 				var selector = '#order-table-no-' + order_id;
