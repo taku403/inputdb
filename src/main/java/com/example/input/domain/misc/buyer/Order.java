@@ -21,6 +21,8 @@ public class Order {
 	@Min(1)
 	private Integer reorder;
 	private Employee employee;
+	private Integer remainQuantity;
+	private Integer receivingQuantity;
 
 
 	public Order() {
@@ -65,6 +67,22 @@ public class Order {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public Integer getRemainQuantity() {
+		return remainQuantity;
+	}
+
+	public void setRemainQuantity(Integer remainQuantity) {
+		this.remainQuantity = remainQuantity;
+	}
+
+	public Integer getReceivingQuantity() {
+		return receivingQuantity;
+	}
+
+	public void setReceivingQuantity(Integer receivingQuantity) {
+		this.receivingQuantity = receivingQuantity;
 	}
 
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-	<c:import url="../../header.jsp"></c:import>
+		<c:import url="../../header.jsp"></c:import>
 		<div class="row justify-content-center">
 			<table class="table table-bordered">
 				<thead>
@@ -23,6 +23,8 @@
 						<th>発注日</th>
 						<th>発注数</th>
 						<th>再発注数量</th>
+						<th>現在の受け入れた数量</th>
+						<th>残りの数量</th>
 						<th>発注者</th>
 					</tr>
 				</thead>
@@ -31,14 +33,18 @@
 						<tr>
 							<td><a class="btn btn-primary"
 								href="edit/<c:out value="${order.id}"/>">修正</a></td>
-							<td><a id="delete-<c:out value="${order.id }"/>" class="delete-btn btn btn-danger"
+							<td><a id="delete-<c:out value="${order.id }"/>"
+								class="delete-btn btn btn-danger"
 								href="delete/<c:out value="${order.id}" />">取り消し</a></td>
 							<td><c:out value="${order.part.name}" /></td>
 							<td><fmt:formatDate value="${order.orderDate}"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td><c:out value="${order.quantity}"></c:out></td>
 							<td><c:out value="${order.reorder}" /></td>
-							<td><c:out value="${order.employee.name}" /> </td>
+							<td><c:out value="${order.receivingQuantity }" /></td>
+							<td><c:out value="${order.remainQuantity }" /></td>
+							<td><c:out value="${order.employee.name}" /></td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -49,12 +55,12 @@
 		</div>
 	</div>
 	<script>
-	$(function () {
-		$('.delete-btn').click(function(){
-			if(!confirm("削除してよろしいですか？")){
-				return false;
-			}
-		})
-	});
+		$(function() {
+			$('.delete-btn').click(function() {
+				if (!confirm("削除してよろしいですか？")) {
+					return false;
+				}
+			})
+		});
 	</script>
 </body>

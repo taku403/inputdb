@@ -49,10 +49,14 @@ public class InventoryController extends Init{
 		Location location = locationDao.findById(id);
 		List<Inventory> inventories = inventoryDao.findByLocation(location);
 		List<Part> parts = partDao.findAll();
+		List<Integer> totalPrices = getPartsTotalPrices(inventories);
+		Long thisInventoryTotalPrice = getThisInventoryTotalPrice(inventories);
 
+		model.addAttribute("totalPrices", totalPrices);
 		model.addAttribute("location", location);
 		model.addAttribute("inventories", inventories);
 		model.addAttribute("parts", parts);
+		model.addAttribute("thisInventoryTotalPrice", thisInventoryTotalPrice);
 		return path + "list";
 	}
 
@@ -76,7 +80,7 @@ public class InventoryController extends Init{
 		Part part = inventory.getPart();
 		List<Location> locations = locationDao.findAll();
 
-		List<Inventory> inventories = inventoryDao.findByParts(part);
+		List<Inventory> inventories = inventoryDao.findByAllParts(part);
 		List<Part> parts = partDao.findAll();
 		List<Location> partsLocations = partsAlreadyLocation(inventories);
 		model.addAttribute("partsLocations", partsLocations);
@@ -117,6 +121,32 @@ public class InventoryController extends Init{
 		return path + "edit";
 	}
 
+	//この倉庫の合計金額を返す
+	public Long getThisInventoryTotalPrice(List<Inventory> inventories) {
+
+		List<Integer> totalPrices = getPartsTotalPrices(inventories);
+		Long inventoryTotalPrice = new Long(0);
+
+		for(Integer totalPrice : totalPrices) {
+
+			inventoryTotalPrice += totalPrice;
+		}
+
+		return inventoryTotalPrice;
+	}
+	//倉庫に格納されてる部品の合計金額リストを返す
+	private List<Integer> getPartsTotalPrices(List<Inventory> inventories){
+
+		List<Integer> totalPrices = new ArrayList<>();
+		Integer totalPrice;
+		for(Inventory inventory : inventories) {
+
+			totalPrice = inventory.getAmount() * inventory.getPart().getPrice();
+			totalPrices.add(totalPrice);
+		}
+
+		return totalPrices;
+	}
 	//	部品倉庫移動を選択時に移動先に既に部品が存在するか確認
 	List<Location> partsAlreadyLocation(List<Inventory> inventories) {
 

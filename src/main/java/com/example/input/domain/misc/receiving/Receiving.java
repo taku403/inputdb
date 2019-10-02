@@ -19,7 +19,6 @@ public class Receiving {
 	private Integer quantity;
 	private String complete;
 	private Date created;
-	@NotNull(groups= {AddGroup.class,EditGroups.class})
 	private Employee employee;
 
 

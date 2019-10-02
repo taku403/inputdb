@@ -9,6 +9,5 @@
 	type="text/javascript"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- <script
-	src="<spring:url value="/js/bootstrap4/bootstrap.min.js" />"
-	type="text/javascript"></script> -->
+<script src="<spring:url value="/js/bootstrap4/bootstrap.min.js" />"
+	type="text/javascript"></script>

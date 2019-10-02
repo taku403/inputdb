@@ -42,6 +42,8 @@
 		<form:form  modelAttribute="order" action="" method="post">
 			<form:hidden path="employee.id" />
 			<form:hidden path="orderDate" />
+			<form:hidden path="receivingQuantity"/>
+			<form:hidden path="remainQuantity"/>
 			<div class="form-group row">
 				<label class="col-sm-1 col-form-label col-form-label-md">品目</label>
 				<form:select

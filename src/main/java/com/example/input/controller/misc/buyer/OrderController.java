@@ -114,6 +114,8 @@ public class OrderController extends Init {
 		order.setPart(part);
 		if (!errors.hasErrors()) {
 
+			//注文情報を更新時に注文情報の残り数量が初期化されてないので修正数量で初期化する
+			order.setRemainQuantity(order.getQuantity());
 			orderDao.update(order);
 			return "forward:/" + path + "list";
 

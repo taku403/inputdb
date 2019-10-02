@@ -20,6 +20,8 @@ public class OrderDaoImpl extends HibernateORM implements OrderDao {
 	public void insert(Order order) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		order.setOrderDate(new Date());
+		order.setReceivingQuantity(new Integer(0));
+		order.setRemainQuantity(new Integer(order.getQuantity()));
 		getSession().save(order);
 	}
 
@@ -57,3 +59,4 @@ public class OrderDaoImpl extends HibernateORM implements OrderDao {
 				.list();
 	}
 }
+

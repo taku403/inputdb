@@ -14,5 +14,6 @@ public interface InventoryDao {
 	Inventory findById(Integer id) throws Exception;
 	List<Inventory> findAll() throws Exception;
 	List<Inventory> findByLocation(Location location) throws Exception;
-	List<Inventory> findByParts(Part part) throws Exception;
+	Inventory findByPart(Part part) throws Exception;
+	List<Inventory>findByAllParts(Part part) throws Exception;
 }

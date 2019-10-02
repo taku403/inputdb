@@ -24,6 +24,7 @@
 					<th>取引先名</th>
 					<th>住所</th>
 					<th>備考</th>
+					<th>登録日</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,6 +37,7 @@
 						<td><c:out value="${item.name}" /></td>
 						<td><c:out value="${item.address }" /></td>
 						<td><c:out value="${item.note}"></c:out></td>
+						<td><c:out value="${item.created}"></c:out></td>
 					</tr>
 				</c:forEach>
 			</tbody>

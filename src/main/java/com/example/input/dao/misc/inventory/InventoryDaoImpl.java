@@ -69,14 +69,25 @@ public class InventoryDaoImpl extends HibernateORM implements InventoryDao {
 				.list();
 	}
 
+	@Override
+	public Inventory findByPart(Part part) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return (Inventory)getSession().createCriteria(Inventory.class)
+				.setFetchMode("part", FetchMode.JOIN)
+				.setFetchMode("location", FetchMode.JOIN)
+				.add(Restrictions.eq("part", part))
+				.uniqueResult();
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Inventory> findByParts(Part part) throws Exception {
+	public List<Inventory> findByAllParts(Part part) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
 		return getSession().createCriteria(Inventory.class)
 				.setFetchMode("part", FetchMode.JOIN)
 				.setFetchMode("location", FetchMode.JOIN)
 				.add(Restrictions.eq("part", part))
 				.list();
+
 	}
 }
