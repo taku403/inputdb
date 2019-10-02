@@ -37,6 +37,8 @@
 			<form:form cssClass="form-inline" modelAttribute="receiving"
 				action="" method="post">
 				<form:hidden path="created" />
+				<form:hidden path="completeFlag"/>
+				<form:hidden path="employee.id"/>
 				<div class="form-group mx-sm-2 mb-2">
 					<label class="sr-only" for="input-order-no">注文番号</label>
 					<form:errors cssClass="text-danger" path="order.id"></form:errors>
@@ -76,13 +78,14 @@
 						<td><c:out value="${order.part.productNo }" /></td>
 						<td><c:out value="${order.part.name}" /></td>
 						<td><c:out value="${order.part.price}" /></td>
+						<td id="order-quantity-<c:out value="${order.id}"/>"> hidden="hidden"><c:out value="${order.quantity }"/></td>
 						<td id="quantity-<c:out value="${order.id}"/>"><c:out
-								value="${order.quantity}" /></td>
+								value="${order.receivingQuantity}" /></td>
 						<td><fmt:formatDate value="${order.part.registerd }"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td><fmt:formatDate value="${order.part.update}"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td><c:out value="${order.part.supplier.name}" /></td>
+						<td><c:out value="${order.part.name}" /></td>
 					</tr>
 				</tbody>
 			</table>

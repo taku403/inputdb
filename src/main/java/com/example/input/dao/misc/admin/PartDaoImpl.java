@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.input.dao.HibernateORM;
 import com.example.input.domain.misc.admin.Part;
+import com.example.input.domain.misc.buyer.Supplier;
 
 @Transactional
 @Repository
@@ -54,6 +55,15 @@ public class PartDaoImpl extends HibernateORM implements PartDao {
 		return getSession().createCriteria(Part.class)
 				.setFetchMode("supplier", FetchMode.JOIN)
 				.setFetchMode("location", FetchMode.JOIN)
+				.list();
+	}
+	@SuppressWarnings("unchecked")
+	public List<Part> findAllSuppliers(Supplier supplier) throws Exception {
+
+		return getSession().createCriteria(Part.class)
+			.setFetchMode("supplier", FetchMode.JOIN)
+				.setFetchMode("location", FetchMode.JOIN)
+				.add(Restrictions.eq("supplier", supplier))
 				.list();
 	}
 }

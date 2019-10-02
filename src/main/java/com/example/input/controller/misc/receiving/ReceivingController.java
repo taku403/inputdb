@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -23,7 +23,6 @@ import com.example.input.dao.misc.inventory.InventoryDao;
 import com.example.input.dao.misc.inventory.LocationDao;
 import com.example.input.dao.misc.receiving.ReceivingDao;
 import com.example.input.domain.AddGroup;
-import com.example.input.domain.misc.admin.Employee;
 import com.example.input.domain.misc.buyer.Order;
 import com.example.input.domain.misc.inventory.Inventory;
 import com.example.input.domain.misc.receiving.Receiving;
@@ -47,8 +46,7 @@ public class ReceivingController extends Init {
 		Receiving receiving = new Receiving();
 		List<Order> orders = orderDao.findAll();
 		String loginId = (String) session.getAttribute("loginId");
-		Employee employee = getByEmployee(loginId);
-		receiving.setEmployee(employee);
+		receiving.setEmployee(loginId);
 		model.addAttribute("orders", orders);
 		model.addAttribute("receiving", receiving);
 
@@ -56,16 +54,13 @@ public class ReceivingController extends Init {
 	}
 
 	@RequestMapping(value = "/receiving/form", method = RequestMethod.POST)
-	String formPost(@Validated(AddGroup.class) Receiving receiving, Errors errors, Model model, HttpSession session)
+	String formPost(@Validated(AddGroup.class) Receiving receiving, BindingResult errors, Model model, HttpSession session)
 			throws Exception {
 		//入力オブジェクトの生成と代入
 		String loginId = (String) session.getAttribute("loginId");
-		Employee employee = getByEmployee(loginId);
-		Order order = orderDao.findById(receiving.getOrder().getId());
-		receiving.setEmployee(employee);
-		receiving.setOrder(order);
+		receiving.setEmployee(loginId);
+		receiving.setOrder(receiving.getOrder().getId());
 
-		System.out.println(receiving.getComplete());
 		System.out.println(receiving.getCreated());
 
 		System.out.println(receiving.getEmployee().getName());
@@ -74,16 +69,11 @@ public class ReceivingController extends Init {
 		if (!errors.hasErrors()) {
 			//分割納品処理
 
-			//残数 = 注文数量の残り数量-受付数量
-			Integer remain = (order.getRemainQuantity() - receiving.getQuantity());
-
-			//受け入れ数が注文数量に満たさなければまだ残りの注文数があるので注文情報を削除しない
-			if (remain > 0) {
+			//受け入れ総数が注文数量に満たさなければ分納状態とみなし注文未完納処理をする
+			if (!receiving.isComplete()) {
 
 				//注文残数を注文票にセットし更新する
-				order.setRemainQuantity(remain);
-				order.setReceivingQuantity(receiving.getQuantity());
-				orderDao.update(order);
+				orderDao.update(receiving.getOrder());
 
 				//				List<Order> orders = orderDao.findAll();
 				//				model.addAttribute("orders", orders);
@@ -91,16 +81,14 @@ public class ReceivingController extends Init {
 			} else {
 
 				//受け入れ数が注文数に達した場合は受け入れ完了とみなし注文情報を削除する
-				order.setReceivingQuantity(receiving.getQuantity());
-				order.setRemainQuantity(remain);
+				//注文完了フラグ
 				//orderDao.delete(order);
 
 			}
 
 			//在庫に受け入れた部品の点数を追加する。
 
-			System.out.println("part -> " + order.getPart().getName());
-			Inventory inventory = inventoryDao.findByPart(order.getPart());
+			Inventory inventory = inventoryDao.findByPart(receiving.getOrder().getPart());
 			//部品の在庫情報が未登録の場合は新規部品とみなし部品を未登録倉庫に登録し挿入する。
 			if (inventory == null) {
 
@@ -108,20 +96,20 @@ public class ReceivingController extends Init {
 				inventory.setAmount(receiving.getQuantity());
 				//ロケーションID１番は未登録倉庫：
 				inventory.setLocation(locationDao.findById(1));
-				inventory.setPart(order.getPart());
+				inventory.setPart(receiving.getOrder().getPart().getId());
 
 				inventoryDao.insert(inventory);
 			} else {
 				//在庫数に受けれ数量を追加した数
 				Integer amount = inventory.getAmount() + receiving.getQuantity();
 				inventory.setAmount(amount);
-				//在庫情報を更新する
+				//すでに部品が存在する在庫情報を更新する
 				inventoryDao.update(inventory);
 			}
 
 			//受付情報に必要な情報をセットし挿入する
-			receiving.setOrder(order);
-			receiving.setEmployee(employee);
+			receiving.setOrder(receiving.getOrder().getId());
+			receiving.setEmployee(loginId);
 			receivingDao.insert(receiving);
 
 			List<Order> orders = orderDao.findAll();
@@ -129,13 +117,17 @@ public class ReceivingController extends Init {
 			return "redirect:/" + path + "form";
 
 		}
+		for(int i = 0; i < 1000; i++) {
+			System.out.println(errors);
+		}
 		List<Order> orders = orderDao.findAll();
-		receiving.setEmployee(employee);
+		receiving.setEmployee(loginId);
 		model.addAttribute("orders", orders);
 		model.addAttribute("receiving", receiving);
 
 		return "redirect:/" + path + "form";
 	}
+
 
 	@InitBinder
 	public void Binder(WebDataBinder binder) {

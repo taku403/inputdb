@@ -13,7 +13,7 @@
 		<property name="quantity" column="quantity" type="integer" />
 		<property name="reorder" column="reorder" type="integer" />
 		<many-to-one name="employee" column="employee_id" />
-		<property name="receivingQuantity" column="receiving_quantity" type="integer" />
-		<property name="remainQuantity" column="remain_quantity" type="integer" />
+		<property name="receivedQuantity" column="received_quantity" type="boolean" />
+		<property name="completeFlag" column="complete_flag" type="integer" />
 	</class>
 </hibernate-mapping>

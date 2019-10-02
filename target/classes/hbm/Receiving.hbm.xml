@@ -11,7 +11,7 @@
 
 		<many-to-one name="order" column="order_id"></many-to-one>
 		<property name="quantity" column="quantity" type="integer"></property>
-		<property name="complete" column="complete" type="string"></property>
+		<property name="completeFlag" column="complete_flag" type="boolean"></property>
 		<property name="created" column="created" type="timestamp"></property>
 		<many-to-one name="employee" column="employee_id"></many-to-one>
 	</class>

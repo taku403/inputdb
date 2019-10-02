@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.input.controller.Init;
 import com.example.input.dao.misc.admin.PartDao;
 import com.example.input.dao.misc.buyer.OrderDao;
+import com.example.input.dao.misc.buyer.SupplierDao;
 import com.example.input.dao.misc.employee.EmployeeDao;
 import com.example.input.domain.misc.admin.Employee;
 import com.example.input.domain.misc.admin.Part;
 import com.example.input.domain.misc.buyer.Order;
+import com.example.input.domain.misc.buyer.Supplier;
 
 @Controller
 public class OrderController extends Init {
@@ -38,10 +40,13 @@ public class OrderController extends Init {
 	private PartDao partDao;
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
+	private SupplierDao supplierDao;
 	private String path = "buyer/order/";
 
 	@RequestMapping(value = "/buyer/order/list")
 	String listGet(Model model) throws Exception {
+
 
 		List<Order> orderList = orderDao.findAll();
 		model.addAttribute("orders", orderList);
@@ -50,12 +55,17 @@ public class OrderController extends Init {
 
 	}
 
-	@RequestMapping(value = "/buyer/order/add")
-	String addGet(@ModelAttribute Order order, Model model, HttpSession session) throws Exception {
+	@RequestMapping(value = "/buyer/order/add/{id}")
+	String addGet(@PathVariable Integer id, Model model, HttpSession session) throws Exception {
 
-		List<Part> partList = partDao.findAll();
-		Employee employee = getByEmployee((String) session.getAttribute("loginId"));
-		order.setEmployee(employee);
+
+		Supplier supplier = supplierDao.findById(id);
+		Order order = new Order();
+		List<Part> partList = partDao.findAllSuppliers(supplier);
+		String loginId = (String)session.getAttribute("loginId");
+		Employee employee = employeeDao.findByloginId(loginId);
+		System.out.println(employee.getName());
+		order.setEmployee(loginId);
 		model.addAttribute("parts", partList);
 		model.addAttribute("order", order);
 
@@ -66,11 +76,10 @@ public class OrderController extends Init {
 	String addPost(@Valid Order order, Errors errors, Model model, HttpSession session)
 			throws Exception {
 
-		Employee employee = employeeDao.findById(order.getEmployee().getId());
-		order.setEmployee(employee);
+		String loginId = (String)session.getAttribute("loginId");
+		order.setEmployee(loginId);
 		if (!errors.hasErrors()) {
-			Part part = partDao.findById(order.getPart().getId());
-			order.setPart(part);
+			order.setPart(order.getPart().getId());
 			orderDao.insert(order);
 			return "redirect:/" + path + "list";
 		}
@@ -96,8 +105,8 @@ public class OrderController extends Init {
 		Order order = orderDao.findById(id);
 		Part part = order.getPart();
 		List<Part> partList = partDao.findAll();
-		Employee employee = getByEmployee((String) session.getAttribute("loginId"));
-		order.setEmployee(employee);
+		String loginId = (String)session.getAttribute("loginId");
+		order.setEmployee(loginId);
 		model.addAttribute("part", part);
 		model.addAttribute("parts", partList);
 		model.addAttribute("order", order);
@@ -106,16 +115,15 @@ public class OrderController extends Init {
 	}
 
 	@RequestMapping(value = "/buyer/order/edit/{id}", method = RequestMethod.POST)
-	String updatePost(@ModelAttribute @Validated Order order, BindingResult errors, Model model) throws Exception {
+	String updatePost(@ModelAttribute @Validated Order order, BindingResult errors, Model model,HttpSession session) throws Exception {
 		System.out.println("call post edit");
-		Part part = partDao.findById(order.getPart().getId());
-		Employee employee = employeeDao.findById(order.getEmployee().getId());
-		order.setEmployee(employee);
-		order.setPart(part);
+		String loginId = (String)session.getAttribute("loginId");
+		order.setEmployee(loginId);
+		order.setPart(order.getPart().getId());
 		if (!errors.hasErrors()) {
 
 			//注文情報を更新時に注文情報の残り数量が初期化されてないので修正数量で初期化する
-			order.setRemainQuantity(order.getQuantity());
+			order.setReceivedQuantity(new Integer(0));
 			orderDao.update(order);
 			return "forward:/" + path + "list";
 
@@ -135,5 +143,6 @@ public class OrderController extends Init {
 		sdf.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 	}
+
 
 }

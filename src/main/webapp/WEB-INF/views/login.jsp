@@ -22,7 +22,7 @@
 		</h2>
 		<div class="row justify-content-center">
 			<form:form cssClass="row justifycontent-center border"
-				style="padding: 10px; border-radius: 8px;" modelAttribute="employee"
+				style="padding: 10px; border-radius: 8px; width: 400px;" modelAttribute="employee"
 				action="" method="post">
 				<div class="form-group col-sm-12">
 					<label for="loginId">ログインID </label>
@@ -31,9 +31,8 @@
 							<c:out value="${loginErr}" />
 						</span>
 					</c:if>
-
 					<form:errors cssClass="text-danger" path="loginId" />
-					<form:input cssClass="form-control" path="loginId" />
+					<form:input  cssClass="form-control" path="loginId" />
 				</div>
 				<div class="form-group col-sm-12">
 					<label for="loginPass">ログインパスワード</label>

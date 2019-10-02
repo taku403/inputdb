@@ -13,12 +13,12 @@ $(function() {
 	// 注文番号入力時の処理
 	$('#input-order-no').on('change', function() {
 
-		//現在表示中のテーブルを消去
+		// 現在表示中のテーブルを消去
 		clear_all_tables();
 		var order_id = $('#input-order-no').val();
 		// 入力が正しいかチェックする
 		order_id = check_input_order_id(order_id);
-		if(!order_id){
+		if (!order_id) {
 			return;
 		}
 		// 入力が正しい場合は該当するテーブルを描写しテーブルセレクタIDを返す。
@@ -46,12 +46,16 @@ $(function() {
 			if (0 > cmp) {
 				alert('注文数より受け入れ数量が多いです');
 				$('#input-quantity').val('');
-				err_flag = true;
+				input_quatity_err_flag = true;
+				$('#btn-submit').prop('disabled', true);
+				$('#btn-submit').val('受け入れ数量が多いです');
 				return false;
 			}
 		} else if (receiving_quantity == 0) {
-			alert('数量０は入力できません');
-			err_flag = true;
+			alert('入力エラーです');
+			input_order_err_flag = true;
+			$('#btn-submit').prop('disabled', true);
+			$('#btn-submit').val('入力エラー');
 			return false;
 		}
 		// 入力項目のエラーフラグのチェックをし、全ての入力が正しければ、送信ぼたんのdisable属性を解除する
@@ -159,10 +163,12 @@ $(function() {
 		if (isNaN(input_receiving_ouantity)) {
 			alert('数字を入力してください');
 			input_quatity_err_flag = true;
+			$('#btn-submit').val('入力エラー').prop('disabled',true);
 			return false;
 		} else if (input_receiving_ouantity == 0) {
 			alert('1以上を入力してください');
 			input_quatity_err_flag = true;
+			$('#btn-submit').val('入力エラー').prop('disabled',true);
 			return false;
 		} else {
 			input_quatity_err_flag = false;
@@ -171,7 +177,7 @@ $(function() {
 	}
 
 	// 全テーブルをクリアする
-	function clear_all_tables(){
+	function clear_all_tables() {
 		$('.order-tables').hide();
 
 	}

@@ -23,8 +23,7 @@
 						<th>発注日</th>
 						<th>発注数</th>
 						<th>再発注数量</th>
-						<th>現在の受け入れた数量</th>
-						<th>残りの数量</th>
+						<th>受け入れた数量</th>
 						<th>発注者</th>
 					</tr>
 				</thead>
@@ -42,7 +41,6 @@
 							<td><c:out value="${order.quantity}"></c:out></td>
 							<td><c:out value="${order.reorder}" /></td>
 							<td><c:out value="${order.receivingQuantity }" /></td>
-							<td><c:out value="${order.remainQuantity }" /></td>
 							<td><c:out value="${order.employee.name}" /></td>
 						</tr>
 					</c:forEach>
